@@ -1,10 +1,13 @@
 import React from "react";
 import "./header.styles.scss";
-const Header = () => {
+const Header = ({ toggleNavbar, setToggleNavbar }) => {
   return (
-    <heaeder className="header" id="header">
+    <heaeder className={`header ${toggleNavbar ? "toggle" : ""}`} id="header">
       <div className="header__left-elements">
-        <div className="header__toggle">
+        <div
+          className="header__toggle"
+          onClick={() => setToggleNavbar((toggleNavbar) => !toggleNavbar)}
+        >
           <i className="bx bx-menu" id="header-toggle"></i>
         </div>
         <div className="header__search-form">
