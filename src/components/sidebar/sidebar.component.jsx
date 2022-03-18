@@ -16,6 +16,12 @@ const Sidebar = ({ toggleNavbar, setToggleNavbar }) => {
             </a>
 
             <div className="nav__list">
+              <button
+                className="font-semibold my-2 bg-gradient-to-r from-darkPurple to-purple py-2 px-6 text-white hover:bg-dark-purple "
+                style={{ borderRadius: "70px" }}
+              >
+                Go to catalog
+              </button>
               <NavItem icon="user" title="Profile" />
               <NavItem icon="search" title="Search" />
               <NavItem icon="heart" title="Favorite" />
