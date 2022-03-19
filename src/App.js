@@ -11,7 +11,7 @@ const App = () => {
       <Header toggleNavbar={toggleNavbar} setToggleNavbar={setToggleNavbar} />
       <Sidebar toggleNavbar={toggleNavbar} setToggleNavbar={setToggleNavbar} />
       <div className={`content p-5 pt-20 ${toggleNavbar ? "toggle" : ""}`}>
-        <h1 className="text-3xl text-white">CONTENT</h1>
+        <h1 className="text-3xl text-white">Content</h1>
       </div>
     </>
   );
