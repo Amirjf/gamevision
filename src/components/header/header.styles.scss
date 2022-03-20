@@ -12,6 +12,7 @@
   z-index: 100;
   transition: 0.5s;
   &.toggle {
+    width: 100%;
     right: 0;
   }
 

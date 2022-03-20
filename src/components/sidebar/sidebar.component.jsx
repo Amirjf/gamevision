@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Logo from "../../assets/img/logo.png";
 import NavItem from "./nav-item.component";
 import "./sidebar.styles.scss";
+import { motion } from "framer-motion";
+import NavItemWithSubmenu from "./nav-item-with-sub-menu.component";
 
 const Sidebar = ({ toggleNavbar, setToggleNavbar }) => {
   return (
@@ -26,13 +28,17 @@ const Sidebar = ({ toggleNavbar, setToggleNavbar }) => {
               <NavItem icon="search" title="Search" />
               <NavItem icon="heart" title="Favorite" />
               <NavItem icon="wallet" title="Balance" />
+              <NavItemWithSubmenu>
+                <NavItem icon="mouse" title="Mouse" />
+                <NavItem icon="headphone" title="Game Headphones" />
+                <NavItem icon="glasses" title="VR glassess" />
+                <NavItem icon="desktop" title="Computers" />
+                <NavItem icon="wallet" title="Games" />
+              </NavItemWithSubmenu>
             </div>
           </div>
 
-          <a href="#" className="nav__link">
-            <i className="bx bx-log-out nav__icon"></i>
-            <span className="nav__name">Log Out</span>
-          </a>
+          {/* bottem link goes here */}
         </nav>
       </div>
     </>

@@ -5,8 +5,6 @@
 body {
   margin: 0;
   font-family: "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background-color: #212123;
   position: relative;
   padding: 0 1rem;
