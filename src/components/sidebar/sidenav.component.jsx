@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../../assets/img/logo.png";
 import NavItem from "./nav-item.component";
-import "./sidebar.styles.scss";
-import { motion } from "framer-motion";
+import "./sidenav.styles.scss";
 import NavItemWithSubmenu from "./nav-item-with-sub-menu.component";
+import CustomButton from "../custom-button/custom-button.component";
 
-const Sidebar = ({ toggleNavbar, setToggleNavbar }) => {
+const SideNav = ({ toggleNavbar }) => {
   return (
     <>
       <div className={`l-navbar ${toggleNavbar ? "hide" : null}`}>
@@ -18,16 +18,12 @@ const Sidebar = ({ toggleNavbar, setToggleNavbar }) => {
             </a>
 
             <div className="nav__list">
-              <button
-                className="font-semibold my-2 bg-gradient-to-r from-darkPurple to-purple py-2 px-6 text-white hover:bg-dark-purple "
-                style={{ borderRadius: "70px" }}
-              >
-                Go to catalog
-              </button>
+              <CustomButton>Go to catalog</CustomButton>
               <NavItem icon="user" title="Profile" />
               <NavItem icon="search" title="Search" />
               <NavItem icon="heart" title="Favorite" />
               <NavItem icon="wallet" title="Balance" />
+
               <NavItemWithSubmenu>
                 <NavItem icon="mouse" title="Mouse" />
                 <NavItem icon="headphone" title="Game Headphones" />
@@ -45,4 +41,4 @@ const Sidebar = ({ toggleNavbar, setToggleNavbar }) => {
   );
 };
 
-export default Sidebar;
+export default SideNav;

@@ -1,17 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/header/header.component";
-import Sidebar from "./components/sidebar/sidebar.component";
+import SideNav from "./components/sidebar/sidenav.component";
+import { useDispatch, useSelector } from "react-redux";
+import { SetProductsAction } from "./redux/products/setProducts";
+import axios from "axios";
 import "./App.scss";
+import ProductsGrid from "./components/products-grid/products-grid.component";
 
 const App = () => {
   const [toggleNavbar, setToggleNavbar] = useState(false);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const { data } = await axios.get(
+        "https://my-json-server.typicode.com/Amirjf/my-json-server/products"
+      );
+      dispatch(SetProductsAction(data));
+    };
+    getProducts();
+  }, []);
+
   return (
     <>
       <Header toggleNavbar={toggleNavbar} setToggleNavbar={setToggleNavbar} />
-      <Sidebar toggleNavbar={toggleNavbar} setToggleNavbar={setToggleNavbar} />
-      <div className={`content p-5 pt-20 ${toggleNavbar ? "toggle" : ""}`}>
-        <h1 className="text-3xl text-white">Content</h1>
+      <SideNav toggleNavbar={toggleNavbar} setToggleNavbar={setToggleNavbar} />
+      <div
+        className={`content p-5 pt-20 mb-36 ${toggleNavbar ? "toggle" : ""}`}
+      >
+        <ProductsGrid />
       </div>
     </>
   );
