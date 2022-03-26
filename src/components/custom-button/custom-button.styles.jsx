@@ -7,17 +7,33 @@ const getButtonStyles = (props) => {
   if (props.plus) {
     return PlusSignButton;
   }
+
   return buttonStyles;
 };
 
+const handleActive = (props) => {
+  if (props.active) {
+    return activeButton;
+  }
+};
+
+export const activeButton = css`
+  background: rgb(126, 85, 193);
+  border: none;
+  color: #fff;
+  &:hover {
+    border: none;
+  }
+`;
+
 const buttonStyles = css`
+  font-weight: 600;
   background: rgb(126, 85, 193);
 `;
 
 export const CustomButtonContainer = styled.button`
   color: #fff;
-  margin: 0.5rem 0;
-  font-weight: 600;
+  margin: 0.5rem 0.4rem;
   border-radius: 70px;
   padding: 0.5rem 1.5rem;
   ${getButtonStyles}
@@ -28,7 +44,7 @@ export const PlusSignButton = css`
   height: 30px;
   font-size: 24px;
   line-height: 5px;
-  padding-bottom: 3px !important;
+  padding-bottom: 5px !important;
   background-color: none;
   border: solid 2px #955cf7;
   color: #955cf7;
@@ -48,4 +64,5 @@ export const InvertedCustomButton = css`
     background: rgb(126, 85, 193);
     border: solid 2px rgb(126, 85, 193);
   }
+  ${handleActive}
 `;

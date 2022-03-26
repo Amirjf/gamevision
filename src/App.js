@@ -9,6 +9,7 @@ import ProductsGrid from "./components/products-grid/products-grid.component";
 
 const App = () => {
   const [toggleNavbar, setToggleNavbar] = useState(false);
+  const products = useSelector((state) => state.products);
 
   const dispatch = useDispatch();
 
