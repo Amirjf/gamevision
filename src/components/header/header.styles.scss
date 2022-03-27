@@ -1,7 +1,7 @@
 .header {
-  width: 100%;
+  width: 80%;
   height: 3.9rem;
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 30;
   display: flex;
@@ -55,17 +55,30 @@
     flex-wrap: wrap;
     align-items: center;
     .header__icons {
-      padding: 0 10px;
-      color: #fff;
+      padding: 0 20px;
+
+      color: #9a9a9a;
 
       i {
-        padding: 3px;
+        padding: 4px 10px;
+        font-size: 1.6rem;
+        position: relative;
+        .header__badge {
+          padding: 3px 6px;
+          top: 0px;
+          left: 25px;
+          font-size: 0.7rem;
+          position: absolute;
+          position: absolute;
+          font-family: Helvetica, sans-serif;
+        }
       }
     }
     .header__img {
-      width: 35px;
-      height: 35px;
+      width: 39px;
+      height: 39px;
       display: flex;
+      border: solid 2px #808082;
       justify-content: center;
       border-radius: 50%;
       overflow: hidden;

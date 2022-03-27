@@ -1,19 +1,19 @@
 import React from "react";
 import Logo from "../../assets/img/logo.png";
 import NavItem from "./nav-item.component";
+import { useSelector } from "react-redux";
 import "./sidenav.styles.scss";
 import NavItemWithSubmenu from "./nav-item-with-sub-menu.component";
 import CustomButton from "../custom-button/custom-button.component";
 
-const SideNav = ({ toggleNavbar }) => {
+const SideNav = () => {
+  const toggleNavbar = useSelector((state) => state.toggleNavbar);
   return (
     <>
       <div className={`l-navbar ${toggleNavbar ? "hide" : null}`}>
         <nav className="nav">
           <div>
             <a href="#" className="nav__logo">
-              {/* <i className="bx bx-layer nav__logo-icon"></i>
-            <span className="nav__logo-name">Bedimcode</span> */}
               <img src={Logo} alt="logo" />
             </a>
 

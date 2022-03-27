@@ -4,12 +4,13 @@ import SideNav from "./components/sidebar/sidenav.component";
 import { useDispatch, useSelector } from "react-redux";
 import { SetProductsAction } from "./redux/products/setProducts";
 import axios from "axios";
-import "./App.scss";
 import ProductsGrid from "./components/products-grid/products-grid.component";
+import "./App.scss";
+import WithSpinner from "./hoc/with-spinner/with-spinner.component";
 
 const App = () => {
-  const [toggleNavbar, setToggleNavbar] = useState(false);
-  const products = useSelector((state) => state.products);
+  const toggleNavbar = useSelector((state) => state.toggleNavbar);
+  const [loading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -19,18 +20,19 @@ const App = () => {
         "https://my-json-server.typicode.com/Amirjf/my-json-server/products"
       );
       dispatch(SetProductsAction(data));
+      setIsLoading(false);
     };
     getProducts();
   }, []);
 
   return (
     <>
-      <Header toggleNavbar={toggleNavbar} setToggleNavbar={setToggleNavbar} />
-      <SideNav toggleNavbar={toggleNavbar} setToggleNavbar={setToggleNavbar} />
+      <Header />
+      <SideNav />
       <div
         className={`content p-5 pt-20 mb-36 ${toggleNavbar ? "toggle" : ""}`}
       >
-        <ProductsGrid />
+        <ProductsGrid isLoading={loading} />
       </div>
     </>
   );

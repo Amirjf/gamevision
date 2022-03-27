@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FilteredProductsAction } from "../../redux/products/filteredProducts";
+import WithSpinner from "../../hoc/with-spinner/with-spinner.component";
 import { ActiveCategoryAction } from "../../redux/products/activeCategory";
+import { ShowMoreAction } from "../../redux/ui/showMore";
 import CustomButton from "../custom-button/custom-button.component";
 import ProductGridItem from "../product-grid-item/product-grid-item.component";
-import SectionHeader from "../section-header/section-header";
-import { motion } from "framer-motion";
+import SectionHeader from "../section-header/section-header.component";
+import { motion, AnimatePresence } from "framer-motion";
 import "./products-grid.styles.scss";
-const ProductsGrid = () => {
+const ProductsGrid = ({ loading }) => {
   const products = useSelector((state) => state.products);
   const filteredProducts = useSelector((state) => state.filteredProducts);
   const activeCategory = useSelector((state) => state.activeCategory);
-
+  const showMore = useSelector((state) => state.showMore);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -65,21 +67,40 @@ const ProductsGrid = () => {
         </CustomButton>
       </SectionHeader>
 
-      <motion.div layout className="flex flex-wrap text-center">
-        {!filteredProducts.length
-          ? products
-              .filter((product, id) => id < 19)
-              .map((product) => (
-                <ProductGridItem key={product.id} product={product} />
-              ))
-          : filteredProducts
-              .filter((product, id) => id < 19)
-              .map((product) => (
+      <AnimatePresence>
+        <motion.div className="flex flex-wrap text-center">
+          {!filteredProducts.length
+            ? products
+                .filter((product, id) => id < showMore)
+                .map((product) => (
+                  <ProductGridItem
+                    isLoading={loading}
+                    key={product.id}
+                    product={product}
+                  />
+                ))
+            : filteredProducts.map((product) => (
                 <ProductGridItem key={product.id} product={product} />
               ))}
-      </motion.div>
+          {showMore === 8 ? (
+            <button
+              className="text-shaded pl-3"
+              onClick={() => dispatch(ShowMoreAction(showMore + 10))}
+            >
+              Show More ...
+            </button>
+          ) : (
+            <button
+              className="text-shaded pl-3"
+              onClick={() => dispatch(ShowMoreAction(showMore - 10))}
+            >
+              Hide
+            </button>
+          )}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
 
-export default ProductsGrid;
+export default WithSpinner(ProductsGrid);
