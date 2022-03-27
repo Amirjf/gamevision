@@ -1,0 +1,50 @@
+.banner__container {
+  transition: all 0.5s ease-in-out;
+  &:hover {
+    background-color: #9460e9 !important;
+    color: #fff;
+    .banner__categorytext {
+      color: #a176ea8f;
+    }
+    h3,
+    span,
+    button {
+      color: #fff;
+    }
+    p {
+      color: #b595ee;
+    }
+  }
+
+  h3,
+  span,
+  button,
+  p {
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+@mixin animate($animation, $duration, $method, $times) {
+  animation: $animation $duration $method $times;
+}
+
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+.banner__categorytext {
+  transition: all 0.5s ease-in-out;
+}
+.banner__categorytext {
+  @include keyframes(category) {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+  @include animate(category, 17s, linear, infinite);
+}

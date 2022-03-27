@@ -10,7 +10,7 @@ const SideNav = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
   return (
     <>
-      <div className={`l-navbar ${toggleNavbar ? "hide" : null}`}>
+      <div className={`l-navbar sm:-left-200 ${toggleNavbar ? "hide" : null}`}>
         <nav className="nav">
           <div>
             <a href="#" className="nav__logo">
