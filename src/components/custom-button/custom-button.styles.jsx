@@ -1,14 +1,9 @@
 import styled, { css } from "styled-components";
 
-const getButtonStyles = (props) => {
-  if (props.inverted) {
-    return InvertedCustomButton;
-  }
+const getPlusStyles = (props) => {
   if (props.plus) {
     return PlusSignButton;
   }
-
-  return buttonStyles;
 };
 
 const handleActive = (props) => {
@@ -26,17 +21,21 @@ export const activeButton = css`
   }
 `;
 
-const buttonStyles = css`
-  font-weight: 600;
-  background: rgb(126, 85, 193);
-`;
-
 export const CustomButtonContainer = styled.button`
   color: #fff;
   margin: 0.5rem 0.4rem;
   border-radius: 70px;
   padding: 0.5rem 1.5rem;
-  ${getButtonStyles}
+  border: ${(props) => (props.inverted ? "solid 2px #414649;" : "none")}
+  transition: all 0.3s;
+  font-weight: 600;
+  &:hover {
+    background: rgb(126, 85, 193);
+    
+  } 
+  background: ${(props) => (props.inverted ? "none" : "rgb(126, 85, 193);")};
+    ${handleActive}   
+    ${getPlusStyles}   
 `;
 
 export const PlusSignButton = css`
@@ -54,15 +53,4 @@ export const PlusSignButton = css`
     border: solid 2px #955cf7;
     color: #fff;
   }
-`;
-
-export const InvertedCustomButton = css`
-  background-color: #212123;
-  border: solid 2px #414649;
-  transition: all 0.3s;
-  &:hover {
-    background: rgb(126, 85, 193);
-    border: solid 2px rgb(126, 85, 193);
-  }
-  ${handleActive}
 `;

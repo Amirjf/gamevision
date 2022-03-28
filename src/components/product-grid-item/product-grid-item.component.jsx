@@ -22,7 +22,9 @@ const ProductGridItem = ({ product }) => {
         </span>
         <strong className="block py-5 text-lightPurple">{price}$</strong>
         <div className="flex justify-center px-5">
-          <CustomButton plus>+</CustomButton>
+          <CustomButton inverted plus>
+            +
+          </CustomButton>
           <button className="text-white text-xs pl-3">ADD TO CART</button>
         </div>
       </motion.div>

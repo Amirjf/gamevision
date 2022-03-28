@@ -31,7 +31,7 @@ const Banner = ({ image, title, category, description, link, price }) => {
             </div>
           </div>
           <div className="flex items-center mt-auto h-44">
-            <CustomButton plus>
+            <CustomButton inverted plus>
               <i className="bx bx-right-arrow-alt text-md pt-0.5 z-50"></i>
             </CustomButton>
             <button className="text-white">Go To Catalog</button>

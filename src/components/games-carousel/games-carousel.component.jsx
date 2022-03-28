@@ -133,7 +133,9 @@ const GamesCarousel = () => {
                   <span className="text-shaded">PC</span>
                 </div>
                 <div className="game-add-to-cart">
-                  <CustomButton plus>+</CustomButton>
+                  <CustomButton inverted plus>
+                    +
+                  </CustomButton>
                 </div>
               </div>
             </div>
