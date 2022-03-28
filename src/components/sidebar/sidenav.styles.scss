@@ -51,7 +51,7 @@
       column-gap: 5.4rem;
       grid-template-columns: max-content max-content;
       align-items: center;
-      transition: 1 s;
+      transition: 1s;
     }
     .nav__link {
       position: relative;
@@ -90,10 +90,9 @@
 
 /* ===== MEDIA QUERIES=====*/
 @media screen and (min-width: 768px) {
-  body {
+  .wrapper {
     padding-left: calc(18% + 2rem);
   }
-
   .header {
     height: calc(3.9rem + 1rem);
   }

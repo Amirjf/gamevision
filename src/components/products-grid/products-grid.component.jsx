@@ -83,19 +83,19 @@ const ProductsGrid = ({ loading }) => {
                 <ProductGridItem key={product.id} product={product} />
               ))}
           {showMore === 8 ? (
-            <button
+            <p
               className="text-shaded pl-3"
               onClick={() => dispatch(ShowMoreAction(showMore + 10))}
             >
               Show More ...
-            </button>
+            </p>
           ) : (
-            <button
+            <p
               className="text-shaded pl-3"
               onClick={() => dispatch(ShowMoreAction(showMore - 10))}
             >
               Hide
-            </button>
+            </p>
           )}
         </motion.div>
       </AnimatePresence>

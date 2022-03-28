@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToggleNavbarAction } from "../../redux/ui/toggleNavbar";
+import CartIcon from "../cart-icon/cart-icon.component";
 import "./header.styles.scss";
 const Header = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
@@ -31,11 +32,7 @@ const Header = () => {
           />
         </div>
         <div className="header__icons">
-          <i className="bx bx-cart relative">
-            <span className="header__badge rounded-3xl bg-lightPurple text-white">
-              4
-            </span>
-          </i>
+          <CartIcon />
         </div>
       </div>
     </heaeder>

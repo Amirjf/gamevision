@@ -1,7 +1,6 @@
-import CustomButton from "../custom-button/custom-button.component";
 import React from "react";
+import CustomButton from "../custom-button/custom-button.component";
 import "./banner.styles.scss";
-import SectionHeader from "../section-header/section-header.component";
 
 const Banner = ({ image, title, category, description, link, price }) => {
   return (
@@ -13,7 +12,7 @@ const Banner = ({ image, title, category, description, link, price }) => {
           backgroundSize: 376,
           backgroundPositionX: 275,
         }}
-        className="banner__container sm:w-full relative h-80 border-2 rounded-md border-[#797782]"
+        className="banner__container relative h-80 border-2 rounded-md border-[#797782]"
       >
         <div className="banner__information -z-20 w-full pt-5 pl-14">
           <span className="text-shaded text-xs">{category}</span>
