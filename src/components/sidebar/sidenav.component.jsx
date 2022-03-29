@@ -1,26 +1,44 @@
 import React from "react";
 import Logo from "../../assets/img/logo.png";
 import NavItem from "./nav-item.component";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./sidenav.styles.scss";
 import NavItemWithSubmenu from "./nav-item-with-sub-menu.component";
 import CustomButton from "../custom-button/custom-button.component";
+import { ToggleNavbarAction } from "../../redux/ui/toggleNavbar";
+import { Link, NavLink } from "react-router-dom";
 
 const SideNav = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
+  const dispatch = useDispatch();
+
   return (
     <>
-      <div className={`l-navbar sm:-left-200 ${toggleNavbar ? "hide" : null}`}>
+      <div
+        className={`l-navbar sm:-left-200 relative ${
+          toggleNavbar ? "hide" : null
+        }`}
+      >
         <nav className="nav">
           <div>
-            <a href="#" className="nav__logo">
+            <Link to="/" className="nav__logo">
               <img src={Logo} alt="logo" />
-            </a>
+            </Link>
+            <div
+              onClick={() => dispatch(ToggleNavbarAction(!toggleNavbar))}
+              className="nav-toggle absolute right-0 top-0 p-4"
+            >
+              <i
+                className="bx bx-menu text-2xl text-white"
+                id="header-toggle"
+              ></i>
+            </div>
 
             <div className="nav__list">
               <CustomButton>Go to catalog</CustomButton>
+              <NavItem icon="home" title="Home" linkTo="/" />
+              <NavItem icon="shopping-bag" title="Checkout" linkTo="checkout" />
               <NavItem icon="user" title="Profile" />
-              <NavItem icon="search" title="Search" />
               <NavItem icon="heart" title="Favorite" />
               <NavItem icon="wallet" title="Balance" />
 

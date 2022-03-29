@@ -1,8 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { AddItemToCartAction } from "../../redux/cart/addItem";
 import CustomButton from "../custom-button/custom-button.component";
 
 const ProductGridItem = ({ product }) => {
+  const dispatch = useDispatch();
   const { title, price, category, image } = product;
   return (
     <motion.div className="flex basis-1/4 mb-5">
@@ -22,10 +25,19 @@ const ProductGridItem = ({ product }) => {
         </span>
         <strong className="block py-5 text-lightPurple">{price}$</strong>
         <div className="flex justify-center px-5">
-          <CustomButton inverted plus>
+          <CustomButton
+            onClick={() => dispatch(AddItemToCartAction(product))}
+            inverted
+            plus
+          >
             +
           </CustomButton>
-          <button className="text-white text-xs pl-3">ADD TO CART</button>
+          <button
+            onClick={() => dispatch(AddItemToCartAction(product))}
+            className="text-white text-xs pl-3"
+          >
+            ADD TO CART
+          </button>
         </div>
       </motion.div>
     </motion.div>

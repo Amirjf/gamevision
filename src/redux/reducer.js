@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { cartReducer } from "./cart";
 import {
   activeFilterReducer,
   filteredGamesReducer,
@@ -13,6 +14,7 @@ import { showMoreReducer, toggleNavbarReducer } from "./ui";
 
 export const rootReducer = combineReducers({
   products: productsReducer,
+  cart: cartReducer,
   filteredProducts: filteredProducts,
   filteredGames: filteredGamesReducer,
   activeGamesFilter: activeFilterReducer,

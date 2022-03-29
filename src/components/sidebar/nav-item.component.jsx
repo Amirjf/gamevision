@@ -1,11 +1,16 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import "./sidenav.styles.scss";
 
-const NavItem = ({ icon, title, ...otherProps }) => {
+const NavItem = ({ icon, title, linkTo, ...otherProps }) => {
   return (
-    <a href="#" className="nav__link">
+    <NavLink
+      to={`${linkTo}`}
+      className={`nav__link ${({ isActive }) => isActive}`}
+    >
       <i className={`bx bx-${icon} nav__icon`}></i>
       <span className="nav__name">{title}</span>
-    </a>
+    </NavLink>
   );
 };
 
