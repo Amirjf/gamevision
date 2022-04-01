@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/homepage/homepage";
 import { SetProductsAction } from "./redux/products/setProducts";
-import axios from "axios";
 import "./App.scss";
 import CheckoutPage from "./pages/checkhout/checkout";
 import Header from "./components/header/header.component";
 import SideNav from "./components/sidebar/sidenav.component";
-
+import { db } from "./firebase/firebaseConfig.js";
+import { collection, getDocs } from "firebase/firestore";
 const App = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
 
@@ -18,11 +18,9 @@ const App = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const { data: products } = await axios.get(
-        "https://my-json-server.typicode.com/Amirjf/my-json-server/products"
-      );
-
-      dispatch(SetProductsAction(products));
+      const productsRef = collection(db, "products");
+      const data = await getDocs(productsRef);
+      dispatch(SetProductsAction(data.docs.map((doc) => ({ ...doc.data() }))));
       setIsLoading(false);
     };
     getProducts();

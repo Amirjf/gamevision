@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FilteredProductsAction } from "../../redux/products/filteredProducts";
 import WithSpinner from "../../hoc/with-spinner/with-spinner.component";
@@ -8,6 +8,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import ProductGridItem from "../product-grid-item/product-grid-item.component";
 import SectionHeader from "../section-header/section-header.component";
 import { motion, AnimatePresence } from "framer-motion";
+
 import "./products-grid.styles.scss";
 const ProductsGrid = ({ loading }) => {
   const products = useSelector((state) => state.products);
@@ -27,6 +28,7 @@ const ProductsGrid = ({ loading }) => {
         .map((product) => product);
       dispatch(FilteredProductsAction(filteredProducts));
     };
+
     filtered();
   }, [activeCategory]);
 

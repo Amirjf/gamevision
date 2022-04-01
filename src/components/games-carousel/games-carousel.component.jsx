@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
+import { db } from "../../firebase/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
 import CustomButton from "../custom-button/custom-button.component";
-import { motion } from "framer-motion";
 import useSwiperRef from "../swiper-ref/use-swiper-ref";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import { AddItemToCartAction } from "../../redux/cart/addItem";
 import { SetGamesAction } from "../../redux/games/setGames";
-import "swiper/css/navigation";
-import "swiper/css/bundle";
 import SectionHeader from "../section-header/section-header.component";
 import { ActiveGameFilterAction } from "../../redux/games/activeGameFilter";
 import WithSpinner from "../../hoc/with-spinner/with-spinner.component";
-
-const API_KEY = "?key=3dbe5baa7df44f92a7e6d3bdd8c28888";
+import "swiper/css/navigation";
+import "swiper/css/bundle";
 
 const GamesCarousel = () => {
   const games = useSelector((state) => state.games);
   const activeGamesFilter = useSelector((state) => state.activeGamesFilter);
+
   const dispatch = useDispatch();
 
   //handling swiper with custom buttons
@@ -26,64 +26,77 @@ const GamesCarousel = () => {
 
   const handleSubmit = (e) => {
     dispatch(ActiveGameFilterAction(e.target.value));
+    switch (activeGamesFilter) {
+      case "popular":
+        const filteredGames = games
+          .filter((game) => game.added_by_status.owned > 900)
+          .map((game) => game);
+        return dispatch(SetGamesAction(filteredGames));
+      case "rating":
+        const ratingGames = games
+          .filter((game) => game.rating > 4)
+          .map((game) => game);
+        return dispatch(SetGamesAction(ratingGames));
+      default:
+        return;
+    }
+  };
+
+  const handleFilter = () => {
+    dispatch();
   };
 
   useEffect(() => {
+    if (activeGamesFilter !== "popular") {
+      return;
+    }
     const getGames = async () => {
-      const { data } = await axios.get(
-        `https://api.rawg.io/api/games${API_KEY}${activeGamesFilter}`
-      );
-      dispatch(SetGamesAction(data.results));
+      const gamesRef = collection(db, "games");
+      const { docs } = await getDocs(gamesRef);
+      dispatch(SetGamesAction(docs.map((doc) => ({ ...doc.data() }))));
     };
     getGames();
   }, [activeGamesFilter]);
 
-  console.log(games);
-  console.log(activeGamesFilter);
+  // console.log(
+  //   "games",
+  //   games.filter((game) => game.rating > 4).map((game) => game)
+  // );
+
   return (
     <>
       <SectionHeader title="Best of Games" categoryTitle="Games">
         <CustomButton
-          active={
-            activeGamesFilter === "&dates=2021-01-01,2021-12-31&ordering=-added"
-          }
-          value="&dates=2021-01-01,2021-12-31&ordering=-added"
+          active={activeGamesFilter === "popular"}
+          value="popular"
           onClick={handleSubmit}
           inverted
         >
-          Top of 2022
+          Most Popular
         </CustomButton>
         <CustomButton
-          active={
-            activeGamesFilter === "&dates=2019-01-01,2019-12-31&ordering=-added"
-          }
-          value="&dates=2019-01-01,2019-12-31&ordering=-added"
+          active={activeGamesFilter === "latest"}
+          value="latest"
           onClick={handleSubmit}
           inverted
         >
-          Popular
+          Latest games
         </CustomButton>
         <CustomButton
-          active={
-            activeGamesFilter ===
-            "&dates=2020-01-01,2020-12-31&ordering=-rating"
-          }
-          value="&dates=2020-01-01,2020-12-31&ordering=-rating"
+          active={activeGamesFilter === "rating"}
+          value="rating"
           inverted
           onClick={handleSubmit}
         >
           Top Rating
         </CustomButton>
         <CustomButton
-          active={
-            activeGamesFilter ===
-            "&dates=2019-09-01,2019-09-30&platforms=18,1,7"
-          }
-          value="&dates=2019-09-01,2019-09-30&platforms=18,1,7"
+          active={activeGamesFilter === "action"}
+          value="action"
           inverted
           onClick={handleSubmit}
         >
-          Best of Last Month
+          Best of action games
         </CustomButton>
       </SectionHeader>
 
@@ -115,7 +128,7 @@ const GamesCarousel = () => {
         }}
       >
         {games.map((game) => (
-          <SwiperSlide>
+          <SwiperSlide key={games.added}>
             <div className="group game-container">
               <div className="image-container relative shadow-md">
                 <img
@@ -133,7 +146,11 @@ const GamesCarousel = () => {
                   <span className="text-shaded">PC</span>
                 </div>
                 <div className="game-add-to-cart">
-                  <CustomButton inverted plus>
+                  <CustomButton
+                    onClick={() => dispatch(AddItemToCartAction(game))}
+                    inverted
+                    plus
+                  >
                     +
                   </CustomButton>
                 </div>

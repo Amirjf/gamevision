@@ -13,10 +13,7 @@ export const gamesReducer = (state = [], action) => {
       return state;
   }
 };
-export const activeFilterReducer = (
-  state = "&dates=2021-01-01,2021-12-31&ordering=-added",
-  action
-) => {
+export const activeFilterReducer = (state = "popular", action) => {
   switch (action.type) {
     case ActiveGameFilterRdxConst:
       return ActiveGameFilterReducer(state, action);
