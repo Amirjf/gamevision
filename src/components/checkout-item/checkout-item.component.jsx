@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { ClearItemFromCartAction } from "../../redux/cart/clearItem";
 import { RemoveItemFromCartAction } from "../../redux/cart/removeItem";
 const CheckoutItem = ({ cartItem }) => {
-  const { category, image, title, price, quantity } = cartItem;
+  const { category, image, title, price, quantity, background_image } =
+    cartItem;
   const dispatch = useDispatch();
   return (
     <motion.div
@@ -20,7 +21,7 @@ const CheckoutItem = ({ cartItem }) => {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
-            src={image}
+            src={background_image ? background_image : image}
             className="w-32 absolute top-0"
           />
         </div>

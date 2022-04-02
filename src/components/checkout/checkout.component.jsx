@@ -6,7 +6,6 @@ import SectionHeader from "../section-header/section-header.component";
 
 const Checkout = () => {
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
   return (
     <>
       <SectionHeader />
@@ -15,7 +14,7 @@ const Checkout = () => {
           <div className="checkout w-3/5 relative">
             <AnimatePresence>
               {cartItems.map((cartItem) => (
-                <CheckoutItem cartItem={cartItem} />
+                <CheckoutItem key={cartItem.id} cartItem={cartItem} />
               ))}
             </AnimatePresence>
           </div>
