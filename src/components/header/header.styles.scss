@@ -3,11 +3,10 @@
   height: 3.9rem;
   position: absolute;
   top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.3rem;
-
   background-color: #212123;
   z-index: 100;
   transition: 0.5s;
@@ -15,6 +14,8 @@
   .header__left-elements {
     display: flex;
     align-items: center;
+    padding-left: 80px;
+
     .header__search-form {
       padding-left: 240px;
       .search-icon {

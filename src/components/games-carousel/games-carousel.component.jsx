@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { db } from "../../firebase/firebaseConfig";
@@ -16,7 +16,8 @@ import "swiper/css/bundle";
 
 const GamesCarousel = () => {
   const games = useSelector((state) => state.games);
-  const activeGamesFilter = useSelector((state) => state.activeGamesFilter);
+
+  const [activeFilter, setActiveFilter] = useState("popular");
 
   const dispatch = useDispatch();
 
@@ -25,8 +26,8 @@ const GamesCarousel = () => {
   const [prevEl, prevElRef] = useSwiperRef();
 
   const handleSubmit = (e) => {
-    dispatch(ActiveGameFilterAction(e.target.value));
-    switch (activeGamesFilter) {
+    setActiveFilter(e.target.value);
+    switch (activeFilter) {
       case "popular":
         const filteredGames = games
           .filter((game) => game.added_by_status.owned > 900)
@@ -42,12 +43,8 @@ const GamesCarousel = () => {
     }
   };
 
-  const handleFilter = () => {
-    dispatch();
-  };
-
   useEffect(() => {
-    if (activeGamesFilter !== "popular") {
+    if (activeFilter !== "popular") {
       return;
     }
     const getGames = async () => {
@@ -56,18 +53,12 @@ const GamesCarousel = () => {
       dispatch(SetGamesAction(docs.map((doc) => ({ ...doc.data() }))));
     };
     getGames();
-  }, [activeGamesFilter]);
-
-  // console.log(
-  //   "games",
-  //   games.filter((game) => game.rating > 4).map((game) => game)
-  // );
-
+  }, [activeFilter]);
   return (
     <>
       <SectionHeader title="Best of Games" categoryTitle="Games">
         <CustomButton
-          active={activeGamesFilter === "popular"}
+          active={activeFilter === "popular"}
           value="popular"
           onClick={handleSubmit}
           inverted
@@ -75,7 +66,7 @@ const GamesCarousel = () => {
           Most Popular
         </CustomButton>
         <CustomButton
-          active={activeGamesFilter === "latest"}
+          active={activeFilter === "latest"}
           value="latest"
           onClick={handleSubmit}
           inverted
@@ -83,7 +74,7 @@ const GamesCarousel = () => {
           Latest games
         </CustomButton>
         <CustomButton
-          active={activeGamesFilter === "rating"}
+          active={activeFilter === "rating"}
           value="rating"
           inverted
           onClick={handleSubmit}
@@ -91,7 +82,7 @@ const GamesCarousel = () => {
           Top Rating
         </CustomButton>
         <CustomButton
-          active={activeGamesFilter === "action"}
+          active={activeFilter === "action"}
           value="action"
           inverted
           onClick={handleSubmit}

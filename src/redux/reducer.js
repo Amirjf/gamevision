@@ -5,11 +5,7 @@ import {
   filteredGamesReducer,
   gamesReducer,
 } from "./games";
-import {
-  productsReducer,
-  activeCategoryReducer,
-  filteredProducts,
-} from "./products";
+import { productsReducer, filteredProducts } from "./products";
 import { showMoreReducer, toggleNavbarReducer } from "./ui";
 
 export const rootReducer = combineReducers({
@@ -18,7 +14,6 @@ export const rootReducer = combineReducers({
   filteredProducts: filteredProducts,
   filteredGames: filteredGamesReducer,
   activeGamesFilter: activeFilterReducer,
-  activeCategory: activeCategoryReducer,
   showMore: showMoreReducer,
   toggleNavbar: toggleNavbarReducer,
   games: gamesReducer,
