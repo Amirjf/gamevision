@@ -1,14 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: #212123;
   position: relative;
-  padding: 0 1rem;
   font-size: 0.9rem;
   transition: 0.5s;
 }

@@ -41,9 +41,10 @@ export const CustomButtonContainer = styled.button`
 export const PlusSignButton = css`
   width: 30px;
   height: 30px;
-  font-size: 24px;
-  line-height: 5px;
-  padding-bottom: 5px !important;
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: none;
   border: solid 2px #955cf7;
   color: #955cf7;

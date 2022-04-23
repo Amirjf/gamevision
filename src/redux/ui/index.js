@@ -1,5 +1,5 @@
-import { ShowMoreReducer, ShowMoreInfoRdxConst } from "./showMore";
-import { ToggleNavbarReducer, ToggleNavbarRdxConst } from "./toggleNavbar";
+import { ShowMoreReducer, ShowMoreInfoRdxConst } from './showMore';
+import { ToggleNavbarReducer, ToggleNavbarRdxConst } from './toggleNavbar';
 
 export const showMoreReducer = (state = 8, action) => {
   switch (action.type) {
@@ -9,7 +9,7 @@ export const showMoreReducer = (state = 8, action) => {
       return state;
   }
 };
-export const toggleNavbarReducer = (state = false, action) => {
+export const toggleNavbarReducer = (state = true, action) => {
   switch (action.type) {
     case ToggleNavbarRdxConst:
       return ToggleNavbarReducer(state, action);

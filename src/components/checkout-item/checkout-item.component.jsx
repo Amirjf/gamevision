@@ -1,10 +1,10 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { AddItemToCartAction } from "../../redux/cart/addItem";
-import { motion } from "framer-motion";
-import { ClearItemFromCartAction } from "../../redux/cart/clearItem";
-import { RemoveItemFromCartAction } from "../../redux/cart/removeItem";
-import Quantity from "../item-quantity/quantity.component";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { AddItemToCartAction } from '../../redux/cart/addItem';
+import { motion } from 'framer-motion';
+import { ClearItemFromCartAction } from '../../redux/cart/clearItem';
+import { RemoveItemFromCartAction } from '../../redux/cart/removeItem';
+import Quantity from '../item-quantity/quantity.component';
 const CheckoutItem = ({ cartItem }) => {
   const { category, image, title, price, quantity, background_image } =
     cartItem;
@@ -16,7 +16,7 @@ const CheckoutItem = ({ cartItem }) => {
       exit={{ opacity: 0, scale: 0 }}
       layout
     >
-      <div className="group hover:border-2 relative border-2 border-grey transition ease duration-300  checkout-item my-5 h-32 flex items-center rounded-lg bg-grey">
+      <div className="group hover:border-2 relative border-2 border-grey transition ease duration-300  checkout-item sm:ml-12 my-5 h-32 flex items-center rounded-lg bg-grey">
         <div className="item__image relative h-40 w-1/4">
           <motion.img
             initial={{ opacity: 0, scale: 0 }}
@@ -27,7 +27,7 @@ const CheckoutItem = ({ cartItem }) => {
           />
         </div>
         <div className="item__name w-1/4">
-          <h4 className="text-white">{title}</h4>
+          <h4 className="text-white text-lg">{title}</h4>
           <span className="text-shaded">{category}</span>
         </div>
         {/* <div className="item__color border-x-2 border-[#373739] w-1/5">

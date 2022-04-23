@@ -1,18 +1,18 @@
-import React from "react";
-import CustomButton from "../custom-button/custom-button.component";
-import "./banner.styles.scss";
+import React from 'react';
+import CustomButton from '../custom-button/custom-button.component';
+import './banner.styles.scss';
 
 const Banner = ({ image, title, category, description, link, price }) => {
   return (
-    <div>
+    <div className="w-full">
       <div
         style={{
           background: `url(${image})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: 376,
-          backgroundPositionX: 275,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 390,
+          backgroundPosition: 380,
         }}
-        className="banner__container relative h-80 border-2 rounded-md border-[#797782]"
+        className="banner__container bg-right relative h-80 border-2 rounded-md border-[#797782]"
       >
         <div className="banner__information -z-20 w-full pt-5 pl-14">
           <span className="text-shaded text-xs">{category}</span>

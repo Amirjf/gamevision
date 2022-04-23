@@ -1,12 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Header from "../../components/header/header.component";
-import SideNav from "../../components/sidebar/sidenav.component";
-import ProductsGrid from "../../components/products-grid/products-grid.component";
-import Banner from "../../components/banner/banner.component";
-import GamesCarousel from "../../components/games-carousel/games-carousel.component";
-import BannerContainer from "../../components/banner-container/banner-container.component";
-import SectionHeader from "../../components/section-header/section-header.component";
+import React from 'react';
+import ProductsGrid from '../../components/products-grid/products-grid.component';
+import Banner from '../../components/banner/banner.component';
+import GamesCarousel from '../../components/games-carousel/games-carousel.component';
+import BannerContainer from '../../components/banner-container/banner-container.component';
+import SectionHeader from '../../components/section-header/section-header.component';
 
 const HomePage = ({ loading }) => {
   return (

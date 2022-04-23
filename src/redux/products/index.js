@@ -1,8 +1,8 @@
-import { SetProductsRdxConst, SetProductsReducer } from "./setProducts";
+import { SetProductsRdxConst, SetProductsReducer } from './setProducts';
 import {
   FilteredProductsRdxConst,
   FilteredProductsReducer,
-} from "./filteredProducts";
+} from './filteredProducts';
 
 export const productsReducer = (state = [], action) => {
   switch (action.type) {

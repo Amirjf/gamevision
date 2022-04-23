@@ -1,6 +1,6 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import "./sidenav.styles.scss";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import './sidenav.styles.scss';
 
 const NavItem = ({ icon, title, linkTo, ...otherProps }) => {
   return (

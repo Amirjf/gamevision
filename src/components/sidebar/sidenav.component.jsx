@@ -1,22 +1,25 @@
-import React from "react";
-import Logo from "../../assets/img/logo.png";
-import NavItem from "./nav-item.component";
-import { useSelector, useDispatch } from "react-redux";
-import "./sidenav.styles.scss";
-import NavItemWithSubmenu from "./nav-item-with-sub-menu.component";
-import CustomButton from "../custom-button/custom-button.component";
-import { ToggleNavbarAction } from "../../redux/ui/toggleNavbar";
-import { Link, NavLink } from "react-router-dom";
+import React from 'react';
+import Logo from '../../assets/img/logo.png';
+import NavItem from './nav-item.component';
+import { useSelector, useDispatch } from 'react-redux';
+import NavItemWithSubmenu from './nav-item-with-sub-menu.component';
+import CustomButton from '../custom-button/custom-button.component';
+import { ToggleNavbarAction } from '../../redux/ui/toggleNavbar';
+import { Link, NavLink } from 'react-router-dom';
+import './sidenav.styles.scss';
+import { navItems } from './navItems';
 
 const SideNav = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
   const dispatch = useDispatch();
 
+  const { categories, desktop, mobile } = navItems;
+
   return (
     <>
       <div
-        className={`l-navbar sm:-left-200 relative ${
-          toggleNavbar ? "hide" : null
+        className={`l-navbar w-1/2 md:w-1/5 relative ${
+          toggleNavbar ? 'hide' : null
         }`}
       >
         <nav className="nav">
@@ -33,21 +36,23 @@ const SideNav = () => {
                 id="header-toggle"
               ></i>
             </div>
-
             <div className="nav__list">
-              <CustomButton>Go to catalog</CustomButton>
-              <NavItem icon="home" title="Home" linkTo="/" />
-              <NavItem icon="shopping-bag" title="Checkout" linkTo="checkout" />
-              <NavItem icon="user" title="Profile" />
-              <NavItem icon="heart" title="Favorite" />
-              <NavItem icon="wallet" title="Balance" />
+              {mobile.map((item) => (
+                <NavItem
+                  icon={item.icon}
+                  title={item.title}
+                  linkTo={item.link ? item.link : '/'}
+                />
+              ))}
 
               <NavItemWithSubmenu>
-                <NavItem icon="mouse" title="Mouse" />
-                <NavItem icon="headphone" title="Game Headphones" />
-                <NavItem icon="glasses" title="VR glassess" />
-                <NavItem icon="desktop" title="Computers" />
-                <NavItem icon="wallet" title="Games" />
+                {categories.map((item) => (
+                  <NavItem
+                    icon={item.icon}
+                    title={item.title}
+                    linkTo={item.link ? item.link : '/'}
+                  />
+                ))}
               </NavItemWithSubmenu>
             </div>
           </div>
