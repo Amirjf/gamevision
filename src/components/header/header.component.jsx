@@ -54,8 +54,18 @@ const Header = () => {
           />
         </div>
         <div className="w-14 flex items-center">
-          <i className="bx bx-search"></i>
+          <i className="bx bx-search text-white text-2xl"></i>
         </div>
+        {/* TODO : Search For Mobile */}
+        {/* <input
+          className="absolute"
+          type="text"
+          placeholder="Search ..."
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onChange={handleOnChange}
+        /> */}
+        {/* {focused && <SearchResults />} */}
       </div>
       <div
         className={`header hidden sm:flex w-full ${
