@@ -10,6 +10,9 @@ const SearchItem = ({ title, price, category, image }) => {
         <h4 className="text-white text-lg ml-5">{title}</h4>
         <h5 className="text-shaded ml-5">{category}</h5>
       </div>
+      <div className="ml-auto">
+        <span className="text-shaded text-base">{price} $</span>
+      </div>
     </div>
   );
 };

@@ -64,7 +64,7 @@ const Header = () => {
               onChange={handleOnChange}
             />
 
-            {focused && <SearchResults />}
+            {focused && <SearchResults searchInput={searchInput} />}
           </div>
         </div>
         <div className="header__right-elements hidden md:flex">
