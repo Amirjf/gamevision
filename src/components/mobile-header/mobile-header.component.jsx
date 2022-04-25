@@ -3,11 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SetProductsSearchAction } from '../../redux/search/setProductsSearch';
 import { ToggleNavbarAction } from '../../redux/ui/toggleNavbar';
-import SearchResults from '../search-results/SearchResults';
+import { SetGamesSearchAction } from '../../redux/search/setGamesSearch';
+import SearchItem from '../search-item/SearchItem';
 
 const MobileHeader = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
+  const productsRes = useSelector((state) => state.productsSearchResults);
+  const gamesRes = useSelector((state) => state.gamesSearchResults);
   const products = useSelector((state) => state.products);
+  const games = useSelector((state) => state.games);
 
   const onFocus = () => setFocused(true);
   const onBlur = () => setFocused(false);
@@ -19,13 +23,20 @@ const MobileHeader = () => {
   const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   useEffect(() => {
+    const allProducts = { products: products, games: games };
     if (searchInput === '') {
       dispatch(SetProductsSearchAction([]));
+      dispatch(SetGamesSearchAction([]));
     } else {
-      const filteredProducts = products.filter((product) => {
+      const filteredProducts = allProducts.products.filter((product) => {
         return product.title.toLowerCase().includes(searchInput);
       });
+      const filteredGames = allProducts.games.filter((game) => {
+        return game.name.toLowerCase().includes(searchInput);
+      });
+
       dispatch(SetProductsSearchAction(filteredProducts));
+      dispatch(SetGamesSearchAction(filteredGames));
     }
   }, [focused, searchInput]);
 
@@ -38,7 +49,7 @@ const MobileHeader = () => {
   };
 
   return (
-    <div className="mobile-header sm:hidden flex absolute justify-evenly p-2 top-0  h-16 w-full">
+    <div className="mobile-header sm:hidden flex absolute justify-evenly p-2 top-0 h-16 w-full">
       <div
         className="flex items-center"
         onClick={() => dispatch(ToggleNavbarAction(!toggleNavbar))}
@@ -68,11 +79,11 @@ const MobileHeader = () => {
             initial={{ y: '100%', opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: '100%', opacity: 0 }}
-            className={`mobile-search-results sm:hidden bg-darkGrey absolute left-0 right-5 top-20 bottom-0 h-screen z-50 `}
+            className={`mobile-search-results sm:hidden bg-darkGrey absolute left-0 right-3 top-20 bottom-0 z-50 `}
           >
             <div className="flex justify-center">
               <input
-                className="py-10 text-center text-3xl text-shaded bg-darkGrey w-full"
+                className="py-5 text-center text-3xl text-shaded bg-darkGrey w-full placeholder:opacity-25"
                 type="text"
                 placeholder="Search ..."
                 onFocus={onFocus}
@@ -80,9 +91,44 @@ const MobileHeader = () => {
                 onChange={handleOnChange}
               />
             </div>
-            {focused && showMobileSearch && (
-              <SearchResults searchInput={searchInput} />
-            )}
+            <div className="w-56 mx-auto opacity-20 border-b-2 border-y-shaded"></div>
+            <div className="bg-darkGrey px-4">
+              {showMobileSearch && (
+                <div>
+                  <h2 className="text-white text-lg py-2">Games</h2>
+                  <div className="flex gap-2 overflow-x-auto">
+                    {gamesRes
+                      .filter((item, idx) => idx < 9)
+                      .map((item, idx) => (
+                        <SearchItem
+                          game
+                          key={`s-${idx}`}
+                          genres={item.genres}
+                          rating={item.rating}
+                          title={item.name}
+                          price="59.99"
+                          category={item.category}
+                          image={item.background_image}
+                        />
+                      ))}
+                  </div>
+                  <div className="py-5">
+                    <h2 className="text-white text-lg">Products</h2>
+                    {productsRes
+                      .filter((item, idx) => idx < 3)
+                      .map((item, idx) => (
+                        <SearchItem
+                          key={`s-${idx}`}
+                          title={item.title}
+                          price={item.price}
+                          category={item.category}
+                          image={item.image}
+                        />
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
