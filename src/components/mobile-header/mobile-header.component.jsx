@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 import { SetProductsSearchAction } from '../../redux/search/setProductsSearch';
 import { ToggleNavbarAction } from '../../redux/ui/toggleNavbar';
 import SearchResults from '../search-results/SearchResults';
@@ -61,24 +62,30 @@ const MobileHeader = () => {
           } text-white text-2xl`}
         ></i>
       </div>
-
-      {showMobileSearch && (
-        <div
-          className={`mobile-search-results sm:hidden bg-darkGrey absolute left-0 right-5 top-20 bottom-0 h-screen z-50 `}
-        >
-          <div className="flex justify-center">
-            <input
-              className="py-10 text-center text-3xl text-shaded bg-darkGrey w-full"
-              type="text"
-              placeholder="Search ..."
-              onFocus={onFocus}
-              onBlur={onBlur}
-              onChange={handleOnChange}
-            />
-          </div>
-          {focused && showMobileSearch && <SearchResults />}
-        </div>
-      )}
+      <AnimatePresence>
+        {showMobileSearch && (
+          <motion.div
+            initial={{ y: '100%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: '100%', opacity: 0 }}
+            className={`mobile-search-results sm:hidden bg-darkGrey absolute left-0 right-5 top-20 bottom-0 h-screen z-50 `}
+          >
+            <div className="flex justify-center">
+              <input
+                className="py-10 text-center text-3xl text-shaded bg-darkGrey w-full"
+                type="text"
+                placeholder="Search ..."
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onChange={handleOnChange}
+              />
+            </div>
+            {focused && showMobileSearch && (
+              <SearchResults searchInput={searchInput} />
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

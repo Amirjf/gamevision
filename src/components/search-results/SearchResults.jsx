@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SearchItem from '../search-item/SearchItem';
@@ -22,11 +23,12 @@ const SearchResults = ({ searchInput }) => {
   }, [searchInput]);
 
   return (
-    <div className="w-full h-auto p-5 absolute z-30 bg-darkGrey">
+    <motion.div layout className="w-full h-auto p-5 absolute z-30 bg-darkGrey">
       {searchResults
         .filter((item, idx) => idx < 4)
-        .map((item) => (
+        .map((item, idx) => (
           <SearchItem
+            key={`s-${idx}`}
             title={item.title}
             price={item.price}
             category={item.category}
@@ -38,14 +40,16 @@ const SearchResults = ({ searchInput }) => {
           possibleCategory && possibleCategory.category.toLowerCase()
         }`}
       >
-        <span className="text-white">
-          {possibleCategory && 'Show All Products in Category'}
-          <span className="text-lightPurple ml-2 border-dashed border-b-2">
-            {possibleCategory ? possibleCategory.category : ''}
+        {searchInput && (
+          <span className="text-white">
+            {possibleCategory && 'Show All Products in Category'}
+            <span className="text-lightPurple ml-2 border-dashed border-b-2">
+              {possibleCategory ? possibleCategory.category : ''}
+            </span>
           </span>
-        </span>
+        )}
       </Link>
-    </div>
+    </motion.div>
   );
 };
 

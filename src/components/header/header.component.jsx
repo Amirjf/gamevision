@@ -4,8 +4,9 @@ import { ToggleNavbarAction } from '../../redux/ui/toggleNavbar';
 import { SetProductsSearchAction } from '../../redux/search/setProductsSearch';
 import CartIcon from '../cart-icon/cart-icon.component';
 import SearchResults from '../search-results/SearchResults';
-import './header.styles.scss';
 import MobileHeader from '../mobile-header/mobile-header.component';
+import './header.styles.scss';
+import { AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
@@ -63,8 +64,9 @@ const Header = () => {
               onBlur={onBlur}
               onChange={handleOnChange}
             />
-
-            {focused && <SearchResults searchInput={searchInput} />}
+            <AnimatePresence>
+              {focused && <SearchResults searchInput={searchInput} />}
+            </AnimatePresence>
           </div>
         </div>
         <div className="header__right-elements hidden md:flex">
