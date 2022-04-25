@@ -66,6 +66,8 @@ const SearchResults = ({ searchInput }) => {
             <SearchItem
               game
               key={`s-${idx}`}
+              genres={item.genres}
+              rating={item.rating}
               title={item.name}
               price="59.99"
               category={item.category}

@@ -73,7 +73,9 @@ const Header = () => {
               onChange={handleOnChange}
             />
             <AnimatePresence>
-              {focused && <SearchResults searchInput={searchInput} />}
+              {focused && searchInput && (
+                <SearchResults searchInput={searchInput} />
+              )}
             </AnimatePresence>
           </div>
         </div>
