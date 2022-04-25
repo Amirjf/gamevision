@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { cartReducer } from './cart';
-import { searchReducer } from './search';
+import { gamesSearchReducer, productsSearchReducer } from './search';
 import {
   activeFilterReducer,
   filteredGamesReducer,
@@ -11,7 +11,8 @@ import { showMoreReducer, toggleNavbarReducer } from './ui';
 
 export const rootReducer = combineReducers({
   products: productsReducer,
-  searchResults: searchReducer,
+  productsSearchResults: productsSearchReducer,
+  gamesSearchResults: gamesSearchReducer,
   cart: cartReducer,
   filteredProducts: filteredProducts,
   filteredGames: filteredGamesReducer,

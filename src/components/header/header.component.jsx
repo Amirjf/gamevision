@@ -5,8 +5,9 @@ import { SetProductsSearchAction } from '../../redux/search/setProductsSearch';
 import CartIcon from '../cart-icon/cart-icon.component';
 import SearchResults from '../search-results/SearchResults';
 import MobileHeader from '../mobile-header/mobile-header.component';
-import './header.styles.scss';
 import { AnimatePresence } from 'framer-motion';
+import { SetGamesSearchAction } from '../../redux/search/setGamesSearch';
+import './header.styles.scss';
 
 const Header = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
@@ -22,13 +23,20 @@ const Header = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const allProducts = { products: products, games: games };
     if (searchInput === '') {
       dispatch(SetProductsSearchAction([]));
+      dispatch(SetGamesSearchAction([]));
     } else {
-      const filteredProducts = products.filter((product) => {
+      const filteredProducts = allProducts.products.filter((product) => {
         return product.title.toLowerCase().includes(searchInput);
       });
+      const filteredGames = allProducts.games.filter((game) => {
+        return game.name.toLowerCase().includes(searchInput);
+      });
+
       dispatch(SetProductsSearchAction(filteredProducts));
+      dispatch(SetGamesSearchAction(filteredGames));
     }
   }, [focused, searchInput]);
 

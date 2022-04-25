@@ -9,7 +9,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AddItemToCartAction } from '../../redux/cart/addItem';
 import { SetGamesAction } from '../../redux/games/setGames';
 import SectionHeader from '../section-header/section-header.component';
-import { ActiveGameFilterAction } from '../../redux/games/activeGameFilter';
 import 'swiper/css/navigation';
 import 'swiper/css/bundle';
 
