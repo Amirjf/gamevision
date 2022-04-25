@@ -5,6 +5,7 @@ import { SetProductsSearchAction } from '../../redux/search/setProductsSearch';
 import CartIcon from '../cart-icon/cart-icon.component';
 import SearchResults from '../search-results/SearchResults';
 import './header.styles.scss';
+import MobileHeader from '../mobile-header/mobile-header.component';
 
 const Header = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
@@ -13,7 +14,6 @@ const Header = () => {
 
   const [searchInput, setSearchInput] = useState('');
   const [focused, setFocused] = useState(false);
-  const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   const onFocus = () => setFocused(true);
   const onBlur = () => setFocused(false);
@@ -40,49 +40,7 @@ const Header = () => {
   };
   return (
     <>
-      <div className="mobile-header sm:hidden flex absolute justify-evenly p-2 top-0  h-16 w-full">
-        <div
-          className="flex items-center"
-          onClick={() => dispatch(ToggleNavbarAction(!toggleNavbar))}
-        >
-          <i className="bx bx-menu-alt-left text-white text-3xl"></i>
-        </div>
-        <div className="w-14 flex mx-auto items-center">
-          <img
-            className="rounded-full"
-            src="https://avatars.githubusercontent.com/u/54482073?v=4"
-            alt="avatar"
-          />
-        </div>
-        <div
-          className="w-14 flex items-center"
-          onClick={() => setShowMobileSearch(!showMobileSearch)}
-        >
-          <i
-            className={`bx bx-${
-              showMobileSearch ? 'x' : 'search'
-            } text-white text-2xl`}
-          ></i>
-        </div>
-
-        {showMobileSearch && (
-          <div
-            className={`mobile-search-results sm:hidden bg-darkGrey absolute left-0 right-5 top-20 bottom-0 h-screen z-50 `}
-          >
-            <div className="flex justify-center">
-              <input
-                className="py-10 text-center text-3xl text-shaded bg-darkGrey w-full"
-                type="text"
-                placeholder="Search ..."
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onChange={handleOnChange}
-              />
-            </div>
-            {focused && showMobileSearch && <SearchResults />}
-          </div>
-        )}
-      </div>
+      <MobileHeader />
       <div
         className={`header hidden sm:flex w-full ${
           toggleNavbar ? 'toggle' : ''
