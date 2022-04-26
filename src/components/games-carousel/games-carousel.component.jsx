@@ -11,6 +11,7 @@ import { SetGamesAction } from '../../redux/games/setGames';
 import SectionHeader from '../section-header/section-header.component';
 import 'swiper/css/navigation';
 import 'swiper/css/bundle';
+import axios from 'axios';
 
 const GamesCarousel = () => {
   const games = useSelector((state) => state.games);
@@ -45,12 +46,17 @@ const GamesCarousel = () => {
     if (activeFilter !== 'popular') {
       return;
     }
-    const getGames = async () => {
-      const gamesRef = collection(db, 'games');
-      const { docs } = await getDocs(gamesRef);
-      dispatch(SetGamesAction(docs.map((doc) => ({ ...doc.data() }))));
-    };
-    getGames();
+    // const getGames = async () => {
+    //   const gamesRef = collection(db, 'games');
+    //   const { docs } = await getDocs(gamesRef);
+    //   dispatch(SetGamesAction(docs.map((doc) => ({ ...doc.data() }))));
+    // };
+    // getGames();
+    axios
+      .get(
+        'https://api.rawg.io/api/games?key=3dbe5baa7df44f92a7e6d3bdd8c28888&dates=2021-01-01,2022-12-31&ordering=-added'
+      )
+      .then((res) => dispatch(SetGamesAction(res.data.results)));
   }, [activeFilter]);
   return (
     <>
@@ -120,7 +126,7 @@ const GamesCarousel = () => {
         }}
       >
         {games.map((game) => (
-          <SwiperSlide key={games.added}>
+          <SwiperSlide key={game.added}>
             <div className="group game-container">
               <div className="image-container relative shadow-md">
                 <img

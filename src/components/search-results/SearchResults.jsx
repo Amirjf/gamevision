@@ -34,7 +34,7 @@ const SearchResults = ({ searchInput }) => {
           .filter((item, idx) => idx < 3)
           .map((item, idx) => (
             <SearchItem
-              key={`s-${idx}`}
+              key={new Date()}
               title={item.title}
               price={item.price}
               category={item.category}
@@ -65,7 +65,7 @@ const SearchResults = ({ searchInput }) => {
           .map((item, idx) => (
             <SearchItem
               game
-              key={`s-${idx}`}
+              key={item.id}
               genres={item.genres}
               rating={item.rating}
               title={item.name}

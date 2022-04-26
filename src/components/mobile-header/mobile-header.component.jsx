@@ -5,6 +5,7 @@ import { SetProductsSearchAction } from '../../redux/search/setProductsSearch';
 import { ToggleNavbarAction } from '../../redux/ui/toggleNavbar';
 import { SetGamesSearchAction } from '../../redux/search/setGamesSearch';
 import SearchItem from '../search-item/SearchItem';
+import SearchItemNotFound from '../search-not-found/search-item-not-found.component';
 
 const MobileHeader = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
@@ -93,40 +94,46 @@ const MobileHeader = () => {
             </div>
             <div className="w-56 mx-auto opacity-20 border-b-2 border-y-shaded"></div>
             <div className="bg-darkGrey px-4">
-              {showMobileSearch && (
-                <div>
-                  <h2 className="text-white text-lg py-2">Games</h2>
-                  <div className="flex gap-2 overflow-x-auto">
-                    {gamesRes
-                      .filter((item, idx) => idx < 9)
-                      .map((item, idx) => (
-                        <SearchItem
-                          game
-                          key={`s-${idx}`}
-                          genres={item.genres}
-                          rating={item.rating}
-                          title={item.name}
-                          price="59.99"
-                          category={item.category}
-                          image={item.background_image}
-                        />
-                      ))}
-                  </div>
-                  <div className="py-5">
-                    <h2 className="text-white text-lg">Products</h2>
-                    {productsRes
-                      .filter((item, idx) => idx < 3)
-                      .map((item, idx) => (
-                        <SearchItem
-                          key={`s-${idx}`}
-                          title={item.title}
-                          price={item.price}
-                          category={item.category}
-                          image={item.image}
-                        />
-                      ))}
-                  </div>
-                </div>
+              {productsRes.length + gamesRes.length !== 0 ? (
+                <>
+                  {showMobileSearch && (
+                    <div>
+                      <h2 className="text-white text-lg py-2">Games</h2>
+                      <div className="flex gap-2 overflow-x-auto">
+                        {gamesRes
+                          .filter((item, idx) => idx < 9)
+                          .map((item, idx) => (
+                            <SearchItem
+                              game
+                              key={`s-${idx}`}
+                              genres={item.genres}
+                              rating={item.rating}
+                              title={item.name}
+                              price="59.99"
+                              category={item.category}
+                              image={item.background_image}
+                            />
+                          ))}
+                      </div>
+                      <div className="py-5">
+                        <h2 className="text-white text-lg">Products</h2>
+                        {productsRes
+                          .filter((item, idx) => idx < 3)
+                          .map((item, idx) => (
+                            <SearchItem
+                              key={`s-${idx}`}
+                              title={item.title}
+                              price={item.price}
+                              category={item.category}
+                              image={item.image}
+                            />
+                          ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <SearchItemNotFound />
               )}
             </div>
           </motion.div>

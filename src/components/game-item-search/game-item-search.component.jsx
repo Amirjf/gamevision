@@ -7,7 +7,7 @@ const GameItemSearch = ({ image, title, rating, genre }) => {
       initial={{ y: '100%' }}
       animate={{ y: 1 }}
       exit={{ y: '100%' }}
-      className="group w-1/2 h-36 sm:w-full sm:h-20 transition-all ease duration-500 flex items-center rounded-md hover:bg-darkPurple p-2"
+      className="group w-1/2 h-36 sm:w-full sm:h-16 transition-all ease duration-500 flex items-center rounded-md hover:bg-darkPurple p-2"
     >
       <div className="flex w-64 h-full sm:w-12 object-cover items-center rounded-md transition-all ease duration-500">
         <img

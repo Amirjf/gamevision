@@ -8,6 +8,7 @@ import SectionHeader from '../section-header/section-header.component';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import './products-grid.styles.scss';
+
 const ProductsGrid = ({ loading }) => {
   const products = useSelector((state) => state.products);
   const { cartItems } = useSelector((state) => state.cart);
@@ -79,7 +80,10 @@ const ProductsGrid = ({ loading }) => {
                   />
                 ))
             : filteredProducts.map((product) => (
-                <ProductGridItem key={product.id} product={product} />
+                <ProductGridItem
+                  key={product.id + new Date()}
+                  product={product}
+                />
               ))}
         </motion.div>
         {showMore === 8 ? (
