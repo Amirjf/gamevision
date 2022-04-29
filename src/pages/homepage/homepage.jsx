@@ -5,10 +5,10 @@ import GamesCarousel from '../../components/games-carousel/games-carousel.compon
 import BannerContainer from '../../components/banner-container/banner-container.component';
 import SectionHeader from '../../components/section-header/section-header.component';
 
-const HomePage = ({ loading }) => {
+const HomePage = ({ isLoading }) => {
   return (
     <>
-      <ProductsGrid isLoading={loading} />
+      <ProductsGrid isLoading={isLoading} />
       <SectionHeader title="Featured" />
       <BannerContainer>
         <Banner

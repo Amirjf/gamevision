@@ -11,14 +11,14 @@ import './App.scss';
 import { getDocsFromCollection } from './firebase/firebase.utils';
 
 const App = () => {
-  const [loading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getProducts = async () => {
       const data = await getDocsFromCollection('products');
-      dispatch(SetProductsAction(data));
       setIsLoading(false);
+      dispatch(SetProductsAction(data));
     };
     getProducts();
   }, []);
@@ -28,7 +28,7 @@ const App = () => {
       <Wrapper>
         <Routes>
           <Route path="/" element={<Navigations />}>
-            <Route index element={<HomePage isLoading={loading} />} />
+            <Route index element={<HomePage isLoading={isLoading} />} />
             <Route path="checkout" element={<CheckoutPage />} />
           </Route>
         </Routes>

@@ -43,59 +43,17 @@ const GamesCarousel = () => {
   };
 
   useEffect(() => {
-    if (activeFilter !== 'popular') {
-      return;
-    }
-    // const getGames = async () => {
-    //   const gamesRef = collection(db, 'games');
-    //   const { docs } = await getDocs(gamesRef);
-    //   dispatch(SetGamesAction(docs.map((doc) => ({ ...doc.data() }))));
-    // };
-    // getGames();
     axios
       .get(
-        'https://api.rawg.io/api/games?key=3dbe5baa7df44f92a7e6d3bdd8c28888&dates=2021-01-01,2022-12-31&ordering=-added'
+        'https://api.rawg.io/api/games?key=3dbe5baa7df44f92a7e6d3bdd8c28888&dates=2022-01-01,2022-04-20&ordering=-added'
       )
       .then((res) => dispatch(SetGamesAction(res.data.results)));
-  }, [activeFilter]);
+  }, []);
   return (
     <>
-      <SectionHeader title="Best of Games" categoryTitle="Games">
-        <CustomButton
-          active={activeFilter === 'popular'}
-          value="popular"
-          onClick={handleSubmit}
-          inverted
-        >
-          Most Popular
-        </CustomButton>
-        <CustomButton
-          active={activeFilter === 'latest'}
-          value="latest"
-          onClick={handleSubmit}
-          inverted
-        >
-          Latest games
-        </CustomButton>
-        <CustomButton
-          active={activeFilter === 'rating'}
-          value="rating"
-          inverted
-          onClick={handleSubmit}
-        >
-          Top Rating
-        </CustomButton>
-        <CustomButton
-          active={activeFilter === 'action'}
-          value="action"
-          inverted
-          onClick={handleSubmit}
-        >
-          Best of action games
-        </CustomButton>
-      </SectionHeader>
+      <SectionHeader title="Lateset Games" />
 
-      <div className="swiper-navs flex justify-end mb-3">
+      <div className="swiper-navs flex absolute right-8 bottom-96 mb-3">
         <div
           className="hover:bg-purple w-9 h-9 flex items-center justify-center text-center mx-2 border-2 rounded-full border-purple"
           ref={prevElRef}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FilteredProductsAction } from '../../redux/products/filteredProducts';
 import { ShowMoreAction } from '../../redux/ui/showMore';
+import Spinner from '../spinner/spinner.component';
 import CustomButton from '../custom-button/custom-button.component';
 import ProductGridItem from '../product-grid-item/product-grid-item.component';
 import SectionHeader from '../section-header/section-header.component';
@@ -9,7 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import './products-grid.styles.scss';
 
-const ProductsGrid = ({ loading }) => {
+const ProductsGrid = ({ isLoading }) => {
   const products = useSelector((state) => state.products);
   const { cartItems } = useSelector((state) => state.cart);
   const filteredProducts = useSelector((state) => state.filteredProducts);
@@ -28,6 +29,8 @@ const ProductsGrid = ({ loading }) => {
 
     filtered();
   }, [activeCategory]);
+
+  console.log(isLoading);
 
   return (
     <div className="my-8">
@@ -67,25 +70,28 @@ const ProductsGrid = ({ loading }) => {
       </SectionHeader>
 
       <AnimatePresence>
-        <motion.div className="flex flex-wrap justify-center text-center">
-          {!filteredProducts.length
-            ? products
-                .filter((product, id) => id < showMore)
-                .map((product, cartItem) => (
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <motion.div className="flex flex-wrap justify-center text-center">
+            {!filteredProducts.length
+              ? products
+                  .filter((product, id) => id < showMore)
+                  .map((product, cartItem) => (
+                    <ProductGridItem
+                      cartItem={cartItem}
+                      key={product.id}
+                      product={product}
+                    />
+                  ))
+              : filteredProducts.map((product) => (
                   <ProductGridItem
-                    isLoading={loading}
-                    cartItem={cartItem}
-                    key={product.id}
+                    key={product.id + new Date()}
                     product={product}
                   />
-                ))
-            : filteredProducts.map((product) => (
-                <ProductGridItem
-                  key={product.id + new Date()}
-                  product={product}
-                />
-              ))}
-        </motion.div>
+                ))}
+          </motion.div>
+        )}
         {showMore === 8 ? (
           <p
             className="text-shaded pl-3"

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
-import Quantity from "../item-quantity/quantity.component";
-import Toastify from "toastify-js";
-import { AddItemToCartAction } from "../../redux/cart/addItem";
-import CustomButton from "../custom-button/custom-button.component";
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
+import Quantity from '../item-quantity/quantity.component';
+import Toastify from 'toastify-js';
+import { AddItemToCartAction } from '../../redux/cart/addItem';
+import CustomButton from '../custom-button/custom-button.component';
 
 const ProductGridItem = ({ product, cartItem }) => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -15,18 +15,6 @@ const ProductGridItem = ({ product, cartItem }) => {
 
   const handleAddToCart = () => {
     dispatch(AddItemToCartAction(product));
-    Toastify({
-      text: `${title} added to your cart`,
-      newWindow: true,
-      close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "center", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
-      style: {
-        background:
-          "linear-gradient(to right, rgb(126, 85, 193), rgb(102, 64, 143))",
-      },
-    }).showToast();
 
     // if (existingCartItem) {
     //   return cartItems.map((cartItem) =>
@@ -58,17 +46,6 @@ const ProductGridItem = ({ product, cartItem }) => {
           <button
             onClick={() => {
               dispatch(AddItemToCartAction(product));
-              Toastify({
-                text: `${title} added to your cart`,
-                close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "center", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
-                style: {
-                  background:
-                    "linear-gradient(to right, rgb(126, 85, 193), rgb(102, 64, 143))",
-                },
-              }).showToast();
             }}
             className="text-white text-xs pl-3"
           >
