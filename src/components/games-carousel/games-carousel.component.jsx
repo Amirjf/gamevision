@@ -9,46 +9,31 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AddItemToCartAction } from '../../redux/cart/addItem';
 import { SetGamesAction } from '../../redux/games/setGames';
 import SectionHeader from '../section-header/section-header.component';
+import axios from 'axios';
 import 'swiper/css/navigation';
 import 'swiper/css/bundle';
-import axios from 'axios';
+import Spinner from '../spinner/spinner.component';
 
 const GamesCarousel = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const games = useSelector((state) => state.games);
-
-  const [activeFilter, setActiveFilter] = useState('popular');
-
   const dispatch = useDispatch();
 
   //handling swiper with custom buttons
   const [nextEl, nextElRef] = useSwiperRef();
   const [prevEl, prevElRef] = useSwiperRef();
 
-  const handleSubmit = (e) => {
-    setActiveFilter(e.target.value);
-    switch (activeFilter) {
-      case 'popular':
-        const filteredGames = games
-          .filter((game) => game.added_by_status.owned > 900)
-          .map((game) => game);
-        return dispatch(SetGamesAction(filteredGames));
-      case 'rating':
-        const ratingGames = games
-          .filter((game) => game.rating > 4)
-          .map((game) => game);
-        return dispatch(SetGamesAction(ratingGames));
-      default:
-        return;
-    }
-  };
-
   useEffect(() => {
-    axios
-      .get(
+    const getGames = async () => {
+      const { data } = await axios.get(
         'https://api.rawg.io/api/games?key=3dbe5baa7df44f92a7e6d3bdd8c28888&dates=2022-01-01,2022-04-20&ordering=-added'
-      )
-      .then((res) => dispatch(SetGamesAction(res.data.results)));
+      );
+      setIsLoading(false);
+      dispatch(SetGamesAction(data.results));
+    };
+    getGames();
   }, []);
+
   return (
     <>
       <SectionHeader title="Lateset Games" />
@@ -71,50 +56,54 @@ const GamesCarousel = () => {
           </span>
         </div>
       </div>
-      <Swiper
-        modules={[Navigation]}
-        breakpoints={{
-          320: { slidesPerView: 2 },
-          480: { slidesPerView: 3 },
-          768: { slidesPerView: 5, spaceBetween: 15 },
-        }}
-        navigation={{
-          prevEl,
-          nextEl,
-        }}
-      >
-        {games.map((game) => (
-          <SwiperSlide key={game.added}>
-            <div className="group game-container">
-              <div className="image-container relative shadow-md">
-                <img
-                  className="transition z-0 w-full h-72 object-cover rounded-lg border-2 border-[#212123] ease-linear duration-300 group-hover:border-2 group-hover:border-[#86858b]"
-                  src={game.background_image}
-                  lazy
-                />
-                <span className="transition ease-linear duration-300 game-price py-1 px-3 rounded-xl absolute z-10 top-4 left-4 bg-[#171b1c] group-hover:bg-purple text-white font-sans text-xs ">
-                  59.99 $
-                </span>
-              </div>
-              <div className="game-info flex justify-between p-1 pt-2">
-                <div className="info">
-                  <h3 className="text-white font-semibold">{game.name}</h3>
-                  <span className="text-shaded">PC</span>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Swiper
+          modules={[Navigation]}
+          breakpoints={{
+            320: { slidesPerView: 2 },
+            480: { slidesPerView: 3 },
+            768: { slidesPerView: 5, spaceBetween: 15 },
+          }}
+          navigation={{
+            prevEl,
+            nextEl,
+          }}
+        >
+          {games.map((game) => (
+            <SwiperSlide key={game.added}>
+              <div className="group game-container">
+                <div className="image-container relative shadow-md">
+                  <img
+                    className="transition z-0 w-full h-72 object-cover rounded-lg border-2 border-[#212123] ease-linear duration-300 group-hover:border-2 group-hover:border-[#86858b]"
+                    src={game.background_image}
+                    lazy
+                  />
+                  <span className="transition ease-linear duration-300 game-price py-1 px-3 rounded-xl absolute z-10 top-4 left-4 bg-[#171b1c] group-hover:bg-purple text-white font-sans text-xs ">
+                    59.99 $
+                  </span>
                 </div>
-                <div className="game-add-to-cart">
-                  <CustomButton
-                    onClick={() => dispatch(AddItemToCartAction(game))}
-                    inverted
-                    plus
-                  >
-                    +
-                  </CustomButton>
+                <div className="game-info flex justify-between p-1 pt-2">
+                  <div className="info">
+                    <h3 className="text-white font-semibold">{game.name}</h3>
+                    <span className="text-shaded">PC</span>
+                  </div>
+                  <div className="game-add-to-cart">
+                    <CustomButton
+                      onClick={() => dispatch(AddItemToCartAction(game))}
+                      inverted
+                      plus
+                    >
+                      +
+                    </CustomButton>
+                  </div>
                 </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </>
   );
 };
