@@ -6,8 +6,10 @@ import { ClearItemFromCartAction } from '../../redux/cart/clearItem';
 import { RemoveItemFromCartAction } from '../../redux/cart/removeItem';
 import Quantity from '../item-quantity/quantity.component';
 const CheckoutItem = ({ cartItem }) => {
-  const { category, image, title, price, quantity, background_image } =
+  const { category, image, title, price, quantity, background_image, kind } =
     cartItem;
+
+  console.log('kind', kind);
   const dispatch = useDispatch();
   return (
     <motion.div
@@ -33,10 +35,12 @@ const CheckoutItem = ({ cartItem }) => {
         {/* <div className="item__color border-x-2 border-[#373739] w-1/5">
           <h4 className="text-white text-center">default</h4>
         </div> */}
-        <Quantity cartItem={cartItem} />
+        {kind === 'product' ? <Quantity cartItem={cartItem} /> : null}
         <div className="item__price text-center w-1/4">
           <span className="text-shaded">Price : </span>
-          <span className="text-white text-xl">{quantity * price} $</span>
+          <span className="text-white text-xl">
+            {kind === 'game' ? '59' : quantity * price} $
+          </span>
         </div>
         <div
           className="flex items-center cursor-pointer"

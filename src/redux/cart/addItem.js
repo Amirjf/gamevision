@@ -1,6 +1,6 @@
-import { createAction } from "redux-actions";
+import { createAction } from 'redux-actions';
 
-export const AddItemToCartRdxConst = "Cart/AddItem";
+export const AddItemToCartRdxConst = 'Cart/AddItem';
 
 export const AddItemToCartAction = createAction(
   AddItemToCartRdxConst,
@@ -12,6 +12,8 @@ export const AddItemReducer = (cartItems, cartItemToAdd) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id == cartItemToAdd.id
   );
+  console.log('dasdasd', cartItemToAdd.genres ? true : false);
+
   if (existingCartItem) {
     return cartItems.map((cartItem) =>
       cartItem.id == cartItemToAdd.id
@@ -20,5 +22,12 @@ export const AddItemReducer = (cartItems, cartItemToAdd) => {
     );
   }
 
-  return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+  return [
+    ...cartItems,
+    {
+      ...cartItemToAdd,
+      kind: cartItemToAdd.genres ? 'game' : 'product',
+      quantity: 1,
+    },
+  ];
 };
