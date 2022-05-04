@@ -30,8 +30,6 @@ const ProductsGrid = ({ isLoading }) => {
     filtered();
   }, [activeCategory]);
 
-  console.log(isLoading);
-
   return (
     <div className="my-8">
       <SectionHeader title={'Our Products'}>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import Quantity from '../item-quantity/quantity.component';
-import Toastify from 'toastify-js';
 import { AddItemToCartAction } from '../../redux/cart/addItem';
 import CustomButton from '../custom-button/custom-button.component';
 

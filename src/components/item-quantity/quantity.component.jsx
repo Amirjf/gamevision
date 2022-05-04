@@ -3,9 +3,8 @@ import { useDispatch } from 'react-redux';
 import { AddItemToCartAction } from '../../redux/cart/addItem';
 import { RemoveItemFromCartAction } from '../../redux/cart/removeItem';
 
-const Quantity = ({ cartItem, product }) => {
+const Quantity = ({ cartItem }) => {
   const { quantity } = cartItem;
-  console.log(cartItem);
   const dispatch = useDispatch();
 
   return (

@@ -1,15 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { AddItemToCartAction } from '../../redux/cart/addItem';
 import { motion } from 'framer-motion';
 import { ClearItemFromCartAction } from '../../redux/cart/clearItem';
-import { RemoveItemFromCartAction } from '../../redux/cart/removeItem';
 import Quantity from '../item-quantity/quantity.component';
 const CheckoutItem = ({ cartItem }) => {
   const { category, image, title, price, quantity, background_image, kind } =
     cartItem;
 
-  console.log('kind', kind);
   const dispatch = useDispatch();
   return (
     <motion.div
@@ -32,9 +29,6 @@ const CheckoutItem = ({ cartItem }) => {
           <h4 className="text-white text-lg">{title}</h4>
           <span className="text-shaded">{category}</span>
         </div>
-        {/* <div className="item__color border-x-2 border-[#373739] w-1/5">
-          <h4 className="text-white text-center">default</h4>
-        </div> */}
         <div className="flex justify-center items-center w-1/4">
           {kind === 'product' ? <Quantity cartItem={cartItem} /> : null}
         </div>
