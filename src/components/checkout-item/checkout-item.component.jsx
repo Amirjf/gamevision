@@ -35,7 +35,9 @@ const CheckoutItem = ({ cartItem }) => {
         {/* <div className="item__color border-x-2 border-[#373739] w-1/5">
           <h4 className="text-white text-center">default</h4>
         </div> */}
-        {kind === 'product' ? <Quantity cartItem={cartItem} /> : null}
+        <div className="flex justify-center items-center w-1/4">
+          {kind === 'product' ? <Quantity cartItem={cartItem} /> : null}
+        </div>
         <div className="item__price text-center w-1/4">
           <span className="text-shaded">Price : </span>
           <span className="text-white text-xl">

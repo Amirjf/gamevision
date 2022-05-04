@@ -9,18 +9,22 @@ import CustomButton from '../custom-button/custom-button.component';
 const ProductGridItem = ({ product, cartItem }) => {
   const { cartItems } = useSelector((state) => state.cart);
 
-  const [existed, setExisted] = useState(null);
+  const [isAdded, setIsAdded] = useState(false);
   const dispatch = useDispatch();
-  const { title, price, category, image, id, quantity } = product;
+  const { title, price, category, image } = product;
 
   const handleAddToCart = () => {
     dispatch(AddItemToCartAction(product));
-
-    // if (existingCartItem) {
-    //   return cartItems.map((cartItem) =>
-    //     cartItem.id == existingCartItem.id ? cartItem.quantity : cartItem
-    //   );
   };
+
+  useEffect(() => {
+    const isExist = cartItems.find((cartItem) => cartItem.id === product.id);
+    if (isExist) {
+      setIsAdded(true);
+    } else {
+      setIsAdded(false);
+    }
+  }, [cartItems]);
 
   return (
     <motion.div className="flex basis-1/4 mb-5">
@@ -39,19 +43,24 @@ const ProductGridItem = ({ product, cartItem }) => {
           {category}
         </span>
         <strong className="block py-5 text-lightPurple">{price}$</strong>
-        <div className="flex justify-center px-5">
-          <CustomButton onClick={handleAddToCart} inverted plus>
-            +
-          </CustomButton>
-          <button
-            onClick={() => {
-              dispatch(AddItemToCartAction(product));
-            }}
-            className="text-white text-xs pl-3"
-          >
-            ADD TO CART
-          </button>
-        </div>
+        {isAdded ? (
+          cartItems.map(
+            (cartItem) =>
+              cartItem.id === product.id && <Quantity cartItem={cartItem} />
+          )
+        ) : (
+          <div className="flex justify-center px-5">
+            <CustomButton onClick={handleAddToCart} inverted plus>
+              +
+            </CustomButton>
+            <button
+              onClick={handleAddToCart}
+              className="text-white text-xs pl-3"
+            >
+              ADD TO CART
+            </button>
+          </div>
+        )}
       </motion.div>
     </motion.div>
   );

@@ -12,7 +12,6 @@ export const AddItemReducer = (cartItems, cartItemToAdd) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id == cartItemToAdd.id
   );
-  console.log('dasdasd', cartItemToAdd.genres ? true : false);
 
   if (existingCartItem) {
     return cartItems.map((cartItem) =>

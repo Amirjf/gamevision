@@ -18,7 +18,6 @@ const Checkout = () => {
               ))}
             </AnimatePresence>
           </div>
-          {/* TODO */}
           <div className="w-2/5 relative">
             <div className="billing-form absolute w-full -right-10 bg-gradient-to-t to-darkPurple from-purple">
               <h2 className="text-2xl p-10 text-white">Billing Form</h2>
