@@ -39,6 +39,7 @@ const SideNav = () => {
             <div className="nav__list">
               {mobile.map((item) => (
                 <NavItem
+                  key={`mn-${item.title}`}
                   icon={item.icon}
                   title={item.title}
                   linkTo={item.link ? item.link : '/'}
@@ -48,6 +49,7 @@ const SideNav = () => {
               <NavItemWithSubmenu>
                 {categories.map((item) => (
                   <NavItem
+                    key={`cn-${item.title}`}
                     icon={item.icon}
                     title={item.title}
                     linkTo={item.link ? item.link : '/'}

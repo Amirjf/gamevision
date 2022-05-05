@@ -14,7 +14,7 @@ const Checkout = () => {
           <div className="checkout w-full sm:w-3/5 relative">
             <AnimatePresence>
               {cartItems.map((cartItem) => (
-                <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+                <CheckoutItem key={`c-${cartItem.id}`} cartItem={cartItem} />
               ))}
             </AnimatePresence>
           </div>

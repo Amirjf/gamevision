@@ -105,7 +105,7 @@ const MobileHeader = () => {
                           .map((item, idx) => (
                             <SearchItem
                               game
-                              key={`s-${idx}`}
+                              key={`g-${item.added}`}
                               genres={item.genres}
                               rating={item.rating}
                               title={item.name}
@@ -121,7 +121,7 @@ const MobileHeader = () => {
                           .filter((item, idx) => idx < 3)
                           .map((item, idx) => (
                             <SearchItem
-                              key={`s-${idx}`}
+                              key={`i-${item.id}`}
                               title={item.title}
                               price={item.price}
                               category={item.category}

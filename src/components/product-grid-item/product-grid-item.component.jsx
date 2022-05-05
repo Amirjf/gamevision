@@ -5,11 +5,11 @@ import Quantity from '../item-quantity/quantity.component';
 import { AddItemToCartAction } from '../../redux/cart/addItem';
 import CustomButton from '../custom-button/custom-button.component';
 
-const ProductGridItem = ({ product, cartItem }) => {
+const ProductGridItem = ({ product }) => {
   const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const [isAdded, setIsAdded] = useState(false);
-  const dispatch = useDispatch();
   const { title, price, category, image } = product;
 
   const handleAddToCart = () => {
@@ -26,7 +26,7 @@ const ProductGridItem = ({ product, cartItem }) => {
   }, [cartItems]);
 
   return (
-    <motion.div className="flex basis-1/4 mb-5">
+    <div className="flex basis-1/4 mb-5">
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -45,7 +45,9 @@ const ProductGridItem = ({ product, cartItem }) => {
         {isAdded ? (
           cartItems.map(
             (cartItem) =>
-              cartItem.id === product.id && <Quantity cartItem={cartItem} />
+              cartItem.id === product.id && (
+                <Quantity key={`pr-${cartItem.id}`} cartItem={cartItem} />
+              )
           )
         ) : (
           <div className="flex justify-center px-5">
@@ -61,7 +63,7 @@ const ProductGridItem = ({ product, cartItem }) => {
           </div>
         )}
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

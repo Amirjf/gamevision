@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FilteredProductsAction } from '../../redux/products/filteredProducts';
 import { ShowMoreAction } from '../../redux/ui/showMore';
+
 import Spinner from '../spinner/spinner.component';
 import CustomButton from '../custom-button/custom-button.component';
 import ProductGridItem from '../product-grid-item/product-grid-item.component';
@@ -21,9 +22,10 @@ const ProductsGrid = ({ isLoading }) => {
 
   useEffect(() => {
     const filtered = async () => {
-      const filteredProducts = await products
-        .filter((product) => product.category === activeCategory)
-        .map((product) => product);
+      const filteredProducts = await products.filter(
+        (product) => product.category === activeCategory
+      );
+
       dispatch(FilteredProductsAction(filteredProducts));
     };
 
@@ -71,41 +73,37 @@ const ProductsGrid = ({ isLoading }) => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <motion.div className="flex flex-wrap justify-center text-center">
+          <div className="flex flex-wrap justify-start text-center">
             {!filteredProducts.length
               ? products
                   .filter((product, id) => id < showMore)
-                  .map((product, cartItem) => (
+                  .map((product) => (
                     <ProductGridItem
-                      cartItem={cartItem}
-                      key={product.id}
+                      key={`p-${product.id}`}
                       product={product}
                     />
                   ))
               : filteredProducts.map((product) => (
-                  <ProductGridItem
-                    key={product.id + new Date()}
-                    product={product}
-                  />
+                  <ProductGridItem key={`r-${product.id}`} product={product} />
                 ))}
-          </motion.div>
-        )}
-        {showMore === 8 ? (
-          <p
-            className="text-shaded pl-3"
-            onClick={() => dispatch(ShowMoreAction(showMore + 10))}
-          >
-            Show More ...
-          </p>
-        ) : (
-          <p
-            className="text-shaded pl-3"
-            onClick={() => dispatch(ShowMoreAction(showMore - 10))}
-          >
-            Hide
-          </p>
+          </div>
         )}
       </AnimatePresence>
+      {showMore === 8 ? (
+        <p
+          className="text-shaded pl-3"
+          onClick={() => dispatch(ShowMoreAction(showMore + 10))}
+        >
+          Show More ...
+        </p>
+      ) : (
+        <p
+          className="text-shaded pl-3"
+          onClick={() => dispatch(ShowMoreAction(showMore - 10))}
+        >
+          Hide
+        </p>
+      )}
     </div>
   );
 };
