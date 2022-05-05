@@ -2,6 +2,7 @@ export const navItems = {
   desktop: [
     { icon: 'home', link: '/', title: 'Home' },
     { icon: 'shopping-bag', link: '/checkout', title: 'Checkout' },
+    { icon: 'game', link: '/games', title: 'Games' },
     { icon: 'user', link: '/auth', title: 'Profile' },
   ],
   mobile: [

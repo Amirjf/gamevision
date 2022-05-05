@@ -25,6 +25,7 @@ const MobileHeader = () => {
 
   useEffect(() => {
     const allProducts = { products: products, games: games };
+
     if (searchInput === '') {
       dispatch(SetProductsSearchAction([]));
       dispatch(SetGamesSearchAction([]));

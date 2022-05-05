@@ -36,6 +36,7 @@ const ProductsGrid = ({ isLoading }) => {
     <div className="my-8">
       <SectionHeader title={'Our Products'}>
         <CustomButton
+          size="md"
           active={activeCategory === 'All'}
           value="All"
           onClick={() => setActiveCategory('All')}

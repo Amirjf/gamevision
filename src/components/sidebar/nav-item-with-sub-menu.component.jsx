@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const NavItemWithSubmenu = ({ children }) => {
+const NavItemWithSubmenu = ({ children, navstitle }) => {
   const [toggleMenu, setToggleMenu] = useState(true);
 
   return (
@@ -12,7 +12,7 @@ const NavItemWithSubmenu = ({ children }) => {
       >
         <div className="my-3">
           <span className="nav__name pl-3 cursor-pointer font-semibold">
-            Category
+            {navstitle}
           </span>
         </div>
         <div>

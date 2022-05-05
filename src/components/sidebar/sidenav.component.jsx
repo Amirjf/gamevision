@@ -3,11 +3,10 @@ import Logo from '../../assets/img/logo.png';
 import NavItem from './nav-item.component';
 import { useSelector, useDispatch } from 'react-redux';
 import NavItemWithSubmenu from './nav-item-with-sub-menu.component';
-import CustomButton from '../custom-button/custom-button.component';
 import { ToggleNavbarAction } from '../../redux/ui/toggleNavbar';
-import { Link, NavLink } from 'react-router-dom';
-import './sidenav.styles.scss';
+import { Link } from 'react-router-dom';
 import { navItems } from './navItems';
+import './sidenav.styles.scss';
 
 const SideNav = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
@@ -37,7 +36,7 @@ const SideNav = () => {
               ></i>
             </div>
             <div className="nav__list">
-              {mobile.map((item) => (
+              {desktop.map((item) => (
                 <NavItem
                   key={`mn-${item.title}`}
                   icon={item.icon}
@@ -46,7 +45,7 @@ const SideNav = () => {
                 />
               ))}
 
-              <NavItemWithSubmenu>
+              <NavItemWithSubmenu navstitle="Category">
                 {categories.map((item) => (
                   <NavItem
                     key={`cn-${item.title}`}

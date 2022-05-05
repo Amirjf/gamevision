@@ -1,8 +1,19 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 const getPlusStyles = (props) => {
   if (props.plus) {
     return PlusSignButton;
+  }
+};
+
+const handleButtonSize = (props) => {
+  switch (props.size) {
+    case 'sm':
+      return 'padding: 0.3rem 1.9rem';
+    case 'md':
+      return 'padding: 0.5rem 1.5rem';
+    default:
+      return 'padding: 0.5rem 1.5rem';
   }
 };
 
@@ -25,17 +36,17 @@ export const CustomButtonContainer = styled.button`
   color: #fff;
   margin: 0.5rem 0.4rem;
   border-radius: 70px;
-  padding: 0.5rem 1.5rem;
-  border: ${(props) => (props.inverted ? "solid 2px #414649;" : "none")}
+  border: ${(props) => (props.inverted ? 'solid 2px #414649;' : 'none')}
   transition: all 0.3s;
-  font-weight: 600;
+  font-weight: 500;
   &:hover {
     background: rgb(126, 85, 193);
     
   } 
-  background: ${(props) => (props.inverted ? "none" : "rgb(126, 85, 193);")};
-    ${handleActive}   
-    ${getPlusStyles}   
+  background: ${(props) => (props.inverted ? 'none' : 'rgb(126, 85, 193);')};
+  ${handleActive}   
+  ${getPlusStyles}   
+  ${handleButtonSize}
 `;
 
 export const PlusSignButton = css`
