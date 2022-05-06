@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
-import Quantity from '../item-quantity/quantity.component';
 import { AddItemToCartAction } from '../../redux/cart/addItem';
-import CustomButton from '../custom-button/custom-button.component';
+import Quantity from '../item-quantity/quantity.component';
 
 const ProductGridItem = ({ product }) => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -51,9 +50,6 @@ const ProductGridItem = ({ product }) => {
           )
         ) : (
           <div className="flex justify-center items-center px-5">
-            {/* <CustomButton onClick={} inverted plus>
-              +
-            </CustomButton> */}
             <div
               className="cursor-pointer"
               onClick={() => handleAddToCart(product)}

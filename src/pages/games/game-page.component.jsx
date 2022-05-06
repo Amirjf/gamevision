@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import GamePageContent from '../../components/game-page-content/game-page-content.component';
+import GamesGrid from '../../components/games-grid/GamesGrid';
 import GenreFilter from '../../components/genre-filter/genre-filter.component';
 import Header from '../../components/header/header.component';
 import SideFilterContainer from '../../components/side-filter-container/SideFilterContainer';
@@ -12,6 +14,9 @@ const GamesPage = () => {
         <GenreFilter />
         <YearOfReleaseFilter />
       </SideFilterContainer>
+      <GamePageContent>
+        <GamesGrid />
+      </GamePageContent>
     </div>
   );
 };

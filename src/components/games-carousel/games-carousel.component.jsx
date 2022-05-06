@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
-import { db } from '../../firebase/firebaseConfig';
-import { getDocs, collection } from 'firebase/firestore';
-import CustomButton from '../custom-button/custom-button.component';
 import useSwiperRef from '../swiper-ref/use-swiper-ref';
 import { useSelector, useDispatch } from 'react-redux';
 import { AddItemToCartAction } from '../../redux/cart/addItem';
 import { SetGamesAction } from '../../redux/games/setGames';
 import SectionHeader from '../section-header/section-header.component';
-import axios from 'axios';
+import GamesApi from '../../http/axios';
 import 'swiper/css/navigation';
 import 'swiper/css/bundle';
 import Spinner from '../spinner/spinner.component';
@@ -27,11 +24,13 @@ const GamesCarousel = () => {
     dispatch(AddItemToCartAction(game));
   };
 
+  //&dates=2022-01-01,2022-04-20&ordering=-added
+
   useEffect(() => {
     const getGames = async () => {
-      const { data } = await axios.get(
-        'https://api.rawg.io/api/games?key=3dbe5baa7df44f92a7e6d3bdd8c28888&dates=2022-01-01,2022-04-20&ordering=-added'
-      );
+      const { data } = await GamesApi.get('', {
+        params: { dates: '2022-01-01,2022-04-20' },
+      });
       setIsLoading(false);
       dispatch(SetGamesAction(data.results));
     };
