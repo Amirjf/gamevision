@@ -22,10 +22,7 @@ export const activeFilterReducer = (state = 'popular', action) => {
       return state;
   }
 };
-export const getShopFilterReducer = (
-  state = 'dates=2021-01-01,2022-04-20',
-  action
-) => {
+export const getShopFilterReducer = (state = '', action) => {
   switch (action.type) {
     case GetShopFilterConst:
       return GetShopFilterReducer(state, action);

@@ -22,6 +22,10 @@ const GamesGrid = () => {
     getGames();
   }, [activeFilter]);
 
+  useEffect(() => {
+    setIsLoading(false);
+  }, [activeFilter]);
+
   console.log(activeFilter);
 
   if (isLoading) {

@@ -13,7 +13,7 @@ export const CheckboxLabel = styled.label`
 export const StyledCheckbox = styled.span`
   position: relative;
 
-  input[type='checkbox'] {
+  input[type='radio'] {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -21,19 +21,19 @@ export const StyledCheckbox = styled.span`
     height: 22px;
     width: 22px;
   }
-  input[type='checkbox'] + .checkbox {
+  input[type='radio'] + .checkbox {
     display: inline-block;
     width: 22px;
     height: 22px;
     background-color: #373e44;
     cursor: pointer;
   }
-  input[type='checkbox']:checked + .checkbox {
+  input[type='radio']:checked + .checkbox {
     border: 7px solid #373e44;
     background: #eee -19px top no-repeat;
   }
 
-  input[type='checkbox'] + .checkbox {
+  input[type='radio'] + .checkbox {
     margin-right: 4px;
   }
 `;
