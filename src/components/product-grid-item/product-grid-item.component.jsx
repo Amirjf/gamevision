@@ -50,13 +50,19 @@ const ProductGridItem = ({ product }) => {
               )
           )
         ) : (
-          <div className="flex justify-center px-5">
-            <CustomButton onClick={handleAddToCart} inverted plus>
+          <div className="flex justify-center items-center px-5">
+            {/* <CustomButton onClick={} inverted plus>
               +
-            </CustomButton>
+            </CustomButton> */}
+            <div
+              className="cursor-pointer"
+              onClick={() => handleAddToCart(product)}
+            >
+              <i className="bx bx-plus-circle text-purple text-3xl"></i>
+            </div>
             <button
-              onClick={handleAddToCart}
-              className="text-white text-xs pl-3"
+              onClick={() => handleAddToCart(product)}
+              className="text-white text-xs pl-3 pb-1"
             >
               ADD TO CART
             </button>

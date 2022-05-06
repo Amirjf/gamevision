@@ -23,6 +23,10 @@ const GamesCarousel = () => {
   const [nextEl, nextElRef] = useSwiperRef();
   const [prevEl, prevElRef] = useSwiperRef();
 
+  const handleAddToCart = (game) => {
+    dispatch(AddItemToCartAction(game));
+  };
+
   useEffect(() => {
     const getGames = async () => {
       const { data } = await axios.get(
@@ -90,13 +94,12 @@ const GamesCarousel = () => {
                     <span className="text-shaded">PC</span>
                   </div>
                   <div className="game-add-to-cart">
-                    <CustomButton
-                      onClick={() => dispatch(AddItemToCartAction(game))}
-                      inverted
-                      plus
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => handleAddToCart(game)}
                     >
-                      +
-                    </CustomButton>
+                      <i className="bx bx-plus-circle text-purple text-3xl"></i>
+                    </div>
                   </div>
                 </div>
               </div>

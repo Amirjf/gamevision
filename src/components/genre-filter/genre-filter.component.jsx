@@ -4,7 +4,7 @@ const GenreFilter = () => {
   const [showFilter, setShowFilter] = useState(true);
   const toggle = () => setShowFilter(!showFilter);
   return (
-    <div>
+    <div className="border-b border-b-shaded pb-2">
       <div className="flex justify-between">
         <span className="text-white">Genre</span>
         <span className="text-shaded text-lg cursor-pointer" onClick={toggle}>
