@@ -5,6 +5,7 @@ import {
   activeFilterReducer,
   filteredGamesReducer,
   gamesReducer,
+  getShopFilterReducer,
 } from './games';
 import { productsReducer, filteredProducts } from './products';
 import { showMoreReducer, toggleNavbarReducer } from './ui';
@@ -12,6 +13,7 @@ import { showMoreReducer, toggleNavbarReducer } from './ui';
 export const rootReducer = combineReducers({
   products: productsReducer,
   productsSearchResults: productsSearchReducer,
+  shopFilter: getShopFilterReducer,
   gamesSearchResults: gamesSearchReducer,
   cart: cartReducer,
   filteredProducts: filteredProducts,

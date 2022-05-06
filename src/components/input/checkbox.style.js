@@ -11,12 +11,18 @@ export const CheckboxLabel = styled.label`
 `;
 
 export const StyledCheckbox = styled.span`
+  position: relative;
+
   input[type='checkbox'] {
-    display: none;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    right: 0;
+    height: 22px;
+    width: 22px;
   }
   input[type='checkbox'] + .checkbox {
     display: inline-block;
-
     width: 22px;
     height: 22px;
     background-color: #373e44;

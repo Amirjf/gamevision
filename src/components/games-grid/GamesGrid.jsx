@@ -7,19 +7,22 @@ import GameCardItem from '../game-card-item/game-card-item.component';
 import Spinner from '../spinner/spinner.component';
 const GamesGrid = () => {
   const games = useSelector((state) => state.games);
+  const activeFilter = useSelector((state) => state.shopFilter);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getGames = async () => {
       const { data } = await GamesApi.get('', {
-        params: { dates: '2022-01-01,2022-04-20' },
+        params: { dates: activeFilter },
       });
-      dispatch(SetGamesAction(data.results));
       setIsLoading(false);
+      dispatch(SetGamesAction(data.results));
     };
     getGames();
-  }, []);
+  }, [activeFilter]);
+
+  console.log(activeFilter);
 
   if (isLoading) {
     return <Spinner />;

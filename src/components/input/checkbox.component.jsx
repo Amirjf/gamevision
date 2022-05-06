@@ -5,14 +5,20 @@ import {
   CheckboxLabel,
 } from './checkbox.style';
 
-const Checkbox = ({ label = '' }) => {
+const Checkbox = ({ label = '', value, ...props }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const toggleCheck = () => setIsChecked(!isChecked);
   return (
     <CheckboxContainer>
       <StyledCheckbox onClick={toggleCheck}>
-        <input type="checkbox" checked={isChecked} id="checkbox" />
+        <input
+          type="checkbox"
+          value={value}
+          checked={isChecked}
+          id="checkbox"
+          {...props}
+        />
         <span className="checkbox"></span>
       </StyledCheckbox>
 
