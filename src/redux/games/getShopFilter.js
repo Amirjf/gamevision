@@ -8,6 +8,16 @@ export const GetShopFilterAction = createAction(
 );
 
 //create reducer
-export const GetShopFilterReducer = (state, action) => {
-  return action.payload;
+export const GetShopFilterReducer = (filters, filterToAdd) => {
+  //TODO : find existing filter and replace the value
+
+  // var foundIndex = filters.findIndex((x) => x.y == item.id);
+  // filters[foundIndex] = item;
+
+  return [
+    ...filters,
+    {
+      ...filterToAdd,
+    },
+  ];
 };

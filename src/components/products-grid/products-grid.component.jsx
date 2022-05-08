@@ -33,8 +33,8 @@ const ProductsGrid = ({ isLoading }) => {
   }, [activeCategory]);
 
   return (
-    <div className="my-8">
-      <SectionHeader title={'Our Products'}>
+    <div className="py-6">
+      <SectionHeader title="Our Products">
         <CustomButton
           size="md"
           active={activeCategory === 'All'}
@@ -74,7 +74,7 @@ const ProductsGrid = ({ isLoading }) => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <div className="flex flex-wrap justify-start text-center">
+          <div className="flex flex-wrap justify-center text-center">
             {!filteredProducts.length
               ? products
                   .filter((product, id) => id < showMore)

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useQuery } from '../../hooks/useQuery';
 import GamesApi from '../../http/axios';
 import { AddItemToCartAction } from '../../redux/cart/addItem';
 import { SetGamesAction } from '../../redux/games/setGames';
@@ -21,12 +22,6 @@ const GamesGrid = () => {
     };
     getGames();
   }, [activeFilter]);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, [activeFilter]);
-
-  console.log(activeFilter);
 
   if (isLoading) {
     return <Spinner />;

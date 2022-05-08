@@ -6,6 +6,10 @@ import {
 } from './activeGameFilter';
 import { GetShopFilterConst, GetShopFilterReducer } from './getShopFilter';
 
+const INITIAL_STATE = {
+  filters: [],
+};
+
 export const gamesReducer = (state = [], action) => {
   switch (action.type) {
     case SetGamesRdxConst:
@@ -22,10 +26,13 @@ export const activeFilterReducer = (state = 'popular', action) => {
       return state;
   }
 };
-export const getShopFilterReducer = (state = '', action) => {
+export const getShopFilterReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GetShopFilterConst:
-      return GetShopFilterReducer(state, action);
+      return {
+        ...state,
+        filters: GetShopFilterReducer(state.filters, action.payload),
+      };
     default:
       return state;
   }

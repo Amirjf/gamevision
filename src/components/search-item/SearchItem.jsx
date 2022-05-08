@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductItemSearch from '../product-item-search/product-item-search.component';
 import GameItemSearch from '../game-item-search/game-item-search.component';
+import Spinner from '../spinner/spinner.component';
 const SearchItem = ({
   title,
   price,
@@ -9,6 +10,7 @@ const SearchItem = ({
   genres,
   rating,
   game,
+  loading,
 }) => {
   return game ? (
     <GameItemSearch

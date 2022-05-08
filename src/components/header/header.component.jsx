@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToggleNavbarAction } from '../../redux/ui/toggleNavbar';
 import { SetProductsSearchAction } from '../../redux/search/setProductsSearch';
@@ -8,11 +8,13 @@ import MobileHeader from '../mobile-header/mobile-header.component';
 import { AnimatePresence } from 'framer-motion';
 import { SetGamesSearchAction } from '../../redux/search/setGamesSearch';
 import './header.styles.scss';
+import GamesApi from '../../http/axios';
 
 const Header = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
   const products = useSelector((state) => state.products);
-  const games = useSelector((state) => state.games);
+
+  const [loading, setLoading] = useState(true);
 
   const [searchInput, setSearchInput] = useState('');
   const [focused, setFocused] = useState(false);
@@ -22,8 +24,16 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
+  const getGames = async () => {
+    console.log(searchInput);
+    const { data } = await GamesApi.get('', {
+      params: { search: searchInput },
+    });
+    dispatch(SetGamesSearchAction(data.results));
+  };
+
   useEffect(() => {
-    const allProducts = { products: products, games: games };
+    const allProducts = { products: products };
     if (searchInput === '') {
       dispatch(SetProductsSearchAction([]));
       dispatch(SetGamesSearchAction([]));
@@ -31,13 +41,18 @@ const Header = () => {
       const filteredProducts = allProducts.products.filter((product) => {
         return product.title.toLowerCase().includes(searchInput);
       });
-      const filteredGames = allProducts.games.filter((game) => {
-        return game.name.toLowerCase().includes(searchInput);
-      });
+      setLoading(false);
+
+      // const filteredGames = allProducts.games.filter((game) => {
+      //   return game.name.toLowerCase().includes(searchInput);
+      // });
 
       dispatch(SetProductsSearchAction(filteredProducts));
-      dispatch(SetGamesSearchAction(filteredGames));
     }
+  }, [focused, searchInput]);
+
+  useEffect(() => {
+    getGames();
   }, [focused, searchInput]);
 
   const handleOnChange = (e) => {
@@ -74,7 +89,7 @@ const Header = () => {
             />
             <AnimatePresence>
               {focused && searchInput && (
-                <SearchResults searchInput={searchInput} />
+                <SearchResults loading={loading} searchInput={searchInput} />
               )}
             </AnimatePresence>
           </div>

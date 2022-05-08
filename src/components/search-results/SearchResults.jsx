@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SearchItem from '../search-item/SearchItem';
+import Spinner from '../spinner/spinner.component';
 
-const SearchResults = ({ searchInput }) => {
+const SearchResults = ({ searchInput, loading }) => {
   const productsRes = useSelector((state) => state.productsSearchResults);
   const gamesRes = useSelector((state) => state.gamesSearchResults);
-
   const [possibleCategory, setPossibleCategory] = useState(null);
 
   const mostOccurProductCategory = (searchResults) =>
@@ -60,20 +60,23 @@ const SearchResults = ({ searchInput }) => {
         layout
         className="w-full h-auto p-5 absolute left-full z-30 bg-darkGrey"
       >
-        {gamesRes
-          .filter((item, idx) => idx < 9)
-          .map((item, idx) => (
+        {gamesRes ? (
+          gamesRes.map((item, idx) => (
             <SearchItem
               game
-              key={`game-${item.added}`}
+              key={`game${item.id}${item.slug}`}
               genres={item.genres}
               rating={item.rating}
               title={item.name}
+              loading={loading}
               price="59.99"
               category={item.category}
               image={item.background_image}
             />
-          ))}
+          ))
+        ) : (
+          <Spinner />
+        )}
       </motion.div>
     </div>
   );
