@@ -12,7 +12,7 @@ const YearOfReleaseFilter = () => {
   const toggle = () => setShowFilter(!showFilter);
 
   useEffect(() => {
-    dispatch(GetShopFilterAction({ year: selected }));
+    dispatch(GetShopFilterAction({ dates: selected }));
   }, [selected]);
 
   console.log(selected);

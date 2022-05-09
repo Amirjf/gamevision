@@ -14,7 +14,7 @@ const GenreFilter = () => {
       id: id,
       name: genre,
     };
-    dispatch(GetShopFilterAction({ genre: genreObj }));
+    dispatch(GetShopFilterAction({ genres: genreObj }));
   };
 
   useEffect(() => {

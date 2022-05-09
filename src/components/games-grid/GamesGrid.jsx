@@ -14,12 +14,13 @@ const GamesGrid = () => {
 
   useEffect(() => {
     const getGames = async () => {
-      const activeFilters = filters.reduce(
-        (acc, item) => ({ ...acc, ...item }),
-        {}
-      );
+      const activeFilters = filters.reduce((acc, item) => {
+        return { ...acc, ...item, genres: item.genres && item.genres.id };
+      }, {});
       const { data } = await GamesApi.get('', {
-        params: { dates: activeFilters.year },
+        params: {
+          ...activeFilters,
+        },
       });
       setIsLoading(false);
       dispatch(SetGamesAction(data.results));
