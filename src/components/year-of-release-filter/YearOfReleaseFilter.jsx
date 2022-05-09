@@ -15,8 +15,6 @@ const YearOfReleaseFilter = () => {
     dispatch(GetShopFilterAction({ dates: selected }));
   }, [selected]);
 
-  console.log(selected);
-
   return (
     <div className="border-b border-b-shaded py-3 mt-2">
       <div className="flex justify-between">

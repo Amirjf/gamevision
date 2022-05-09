@@ -28,6 +28,12 @@ const GamesGrid = () => {
     getGames();
   }, [filters]);
 
+  useEffect(() => {
+    setIsLoading(true);
+  }, [filters]);
+
+  console.log(isLoading);
+
   if (isLoading) {
     return <Spinner />;
   }
