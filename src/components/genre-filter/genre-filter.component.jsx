@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useQuery } from '../../hooks/useQuery';
+import React, { useState, useEffect } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GetShopFilterAction } from '../../redux/games/getShopFilter';
 const GenreFilter = () => {
-  let query = useQuery();
+  const { filters } = useSelector((state) => state.shopFilter);
   const dispatch = useDispatch();
   const [showFilter, setShowFilter] = useState(true);
-  const [genre, setGenre] = useState('');
 
   const toggle = () => setShowFilter(!showFilter);
 
-  const handleActiveGenre = (genre) => {
-    dispatch(GetShopFilterAction({ genre: genre }));
+  const handleActiveGenre = (genre, id) => {
+    const genreObj = {
+      id: id,
+      name: genre,
+    };
+    dispatch(GetShopFilterAction({ genre: genreObj }));
   };
+
+  useEffect(() => {
+    const getGenre = filters.find(
+      (filter) => Object.keys(filter)[0] === 'genre'
+    );
+  }, [filters]);
 
   return (
     <div className="border-b border-b-shaded pb-2 mt-2">
@@ -27,26 +34,34 @@ const GenreFilter = () => {
       {showFilter && (
         <div>
           <CustomButton
-            onClick={() => handleActiveGenre('rpg')}
+            onClick={() => handleActiveGenre('rpg', 5)}
             size="sm"
             inverted
           >
             RPG
           </CustomButton>
 
-          <CustomButton size="sm" inverted>
+          <CustomButton
+            onClick={() => handleActiveGenre('shooter', 2)}
+            size="sm"
+            inverted
+          >
             Shooter
           </CustomButton>
 
-          <CustomButton size="sm" inverted>
-            Action
+          <CustomButton
+            onClick={() => handleActiveGenre('racing', 1)}
+            size="sm"
+            inverted
+          >
+            Racing
           </CustomButton>
 
-          <CustomButton size="sm" inverted>
-            Sport
-          </CustomButton>
-
-          <CustomButton size="sm" inverted>
+          <CustomButton
+            onClick={() => handleActiveGenre('adventure', 3)}
+            size="sm"
+            inverted
+          >
             Adventure
           </CustomButton>
         </div>

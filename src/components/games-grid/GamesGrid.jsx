@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useQuery } from '../../hooks/useQuery';
+
 import GamesApi from '../../http/axios';
-import { AddItemToCartAction } from '../../redux/cart/addItem';
+
 import { SetGamesAction } from '../../redux/games/setGames';
 import GameCardItem from '../game-card-item/game-card-item.component';
 import Spinner from '../spinner/spinner.component';
 const GamesGrid = () => {
   const games = useSelector((state) => state.games);
-  const activeFilter = useSelector((state) => state.shopFilter);
+  const { filters } = useSelector((state) => state.shopFilter);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getGames = async () => {
+      const activeFilters = filters.reduce(
+        (acc, item) => ({ ...acc, ...item }),
+        {}
+      );
       const { data } = await GamesApi.get('', {
-        params: { dates: activeFilter },
+        params: { dates: activeFilters.year },
       });
       setIsLoading(false);
       dispatch(SetGamesAction(data.results));
     };
     getGames();
-  }, [activeFilter]);
+  }, [filters]);
 
   if (isLoading) {
     return <Spinner />;

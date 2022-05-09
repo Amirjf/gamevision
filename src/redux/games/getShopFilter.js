@@ -9,15 +9,16 @@ export const GetShopFilterAction = createAction(
 
 //create reducer
 export const GetShopFilterReducer = (filters, filterToAdd) => {
-  //TODO : find existing filter and replace the value
+  const key = Object.keys(filterToAdd)[0];
 
-  // var foundIndex = filters.findIndex((x) => x.y == item.id);
-  // filters[foundIndex] = item;
+  const exist = filters.find((filter) => Object.keys(filter)[0] === key);
 
-  return [
-    ...filters,
-    {
-      ...filterToAdd,
-    },
-  ];
+  if (exist) {
+    const findIndex = filters.findIndex((filter) => filter === exist);
+
+    findIndex !== -1 && filters.splice(findIndex, 1);
+    return [...filters, filterToAdd];
+  } else {
+    return [...filters, filterToAdd];
+  }
 };
