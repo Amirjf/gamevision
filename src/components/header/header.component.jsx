@@ -7,8 +7,8 @@ import SearchResults from '../search-results/SearchResults';
 import MobileHeader from '../mobile-header/mobile-header.component';
 import { AnimatePresence } from 'framer-motion';
 import { SetGamesSearchAction } from '../../redux/search/setGamesSearch';
-import './header.styles.scss';
 import GamesApi from '../../http/axios';
+import './header.styles.scss';
 
 const Header = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
@@ -25,7 +25,6 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const getGames = async () => {
-    console.log(searchInput);
     const { data } = await GamesApi.get('', {
       params: { search: searchInput },
     });
@@ -41,12 +40,8 @@ const Header = () => {
       const filteredProducts = allProducts.products.filter((product) => {
         return product.title.toLowerCase().includes(searchInput);
       });
+
       setLoading(false);
-
-      // const filteredGames = allProducts.games.filter((game) => {
-      //   return game.name.toLowerCase().includes(searchInput);
-      // });
-
       dispatch(SetProductsSearchAction(filteredProducts));
     }
   }, [focused, searchInput]);
@@ -64,7 +59,7 @@ const Header = () => {
   };
   return (
     <>
-      <MobileHeader />
+      <MobileHeader getGames={getGames} />
       <div
         className={`header hidden sm:flex w-full ${
           toggleNavbar ? 'toggle' : ''
@@ -88,7 +83,7 @@ const Header = () => {
               onChange={handleOnChange}
             />
             <AnimatePresence>
-              {focused && searchInput && (
+              {searchInput && (
                 <SearchResults loading={loading} searchInput={searchInput} />
               )}
             </AnimatePresence>

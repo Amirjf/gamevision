@@ -6,13 +6,14 @@ import { ToggleNavbarAction } from '../../redux/ui/toggleNavbar';
 import { SetGamesSearchAction } from '../../redux/search/setGamesSearch';
 import SearchItem from '../search-item/SearchItem';
 import SearchItemNotFound from '../search-not-found/search-item-not-found.component';
+import GamesApi from '../../http/axios';
+import GameItemSearch from '../game-item-search/game-item-search.component';
 
 const MobileHeader = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
   const productsRes = useSelector((state) => state.productsSearchResults);
   const gamesRes = useSelector((state) => state.gamesSearchResults);
   const products = useSelector((state) => state.products);
-  const games = useSelector((state) => state.games);
 
   const onFocus = () => setFocused(true);
   const onBlur = () => setFocused(false);
@@ -23,8 +24,15 @@ const MobileHeader = () => {
 
   const [showMobileSearch, setShowMobileSearch] = useState(false);
 
+  const getGames = async () => {
+    const { data } = await GamesApi.get('', {
+      params: { search: searchInput },
+    });
+    dispatch(SetGamesSearchAction(data.results));
+  };
+
   useEffect(() => {
-    const allProducts = { products: products, games: games };
+    const allProducts = { products: products };
 
     if (searchInput === '') {
       dispatch(SetProductsSearchAction([]));
@@ -33,13 +41,12 @@ const MobileHeader = () => {
       const filteredProducts = allProducts.products.filter((product) => {
         return product.title.toLowerCase().includes(searchInput);
       });
-      const filteredGames = allProducts.games.filter((game) => {
-        return game.name.toLowerCase().includes(searchInput);
-      });
-
       dispatch(SetProductsSearchAction(filteredProducts));
-      dispatch(SetGamesSearchAction(filteredGames));
     }
+  }, [focused, searchInput]);
+
+  useEffect(() => {
+    getGames();
   }, [focused, searchInput]);
 
   const handleOnChange = (e) => {
@@ -100,13 +107,12 @@ const MobileHeader = () => {
                   {showMobileSearch && (
                     <div>
                       <h2 className="text-white text-lg py-2">Games</h2>
-                      <div className="flex gap-2 overflow-x-auto">
+                      <div className="flex flex-nowrap gap-6 overflow-x-auto overflow-y-hidden">
                         {gamesRes
                           .filter((item, idx) => idx < 9)
-                          .map((item, idx) => (
-                            <SearchItem
-                              game
-                              key={`g-${item.added}`}
+                          .map((item) => (
+                            <GameItemSearch
+                              key={`gamesearch${item.id}${item.slug}`}
                               genres={item.genres}
                               rating={item.rating}
                               title={item.name}

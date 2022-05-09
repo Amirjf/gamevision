@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SearchItem from '../search-item/SearchItem';
 import Spinner from '../spinner/spinner.component';
+import GameItemSearch from '../game-item-search/game-item-search.component';
 
 const SearchResults = ({ searchInput, loading }) => {
   const productsRes = useSelector((state) => state.productsSearchResults);
   const gamesRes = useSelector((state) => state.gamesSearchResults);
+
   const [possibleCategory, setPossibleCategory] = useState(null);
 
   const mostOccurProductCategory = (searchResults) =>
@@ -20,8 +22,7 @@ const SearchResults = ({ searchInput, loading }) => {
     );
 
   useEffect(() => {
-    const res = mostOccurProductCategory(productsRes);
-    setPossibleCategory(res);
+    setPossibleCategory(mostOccurProductCategory(productsRes));
   }, [searchInput]);
 
   return (
@@ -41,42 +42,32 @@ const SearchResults = ({ searchInput, loading }) => {
               image={item.image}
             />
           ))}
-        <Link
-          to={`/products/${
-            possibleCategory && possibleCategory.category.toLowerCase()
-          }`}
-        >
-          {searchInput && (
-            <span className="text-white">
-              {possibleCategory && 'Show All Products in Category'}
-              <span className="text-lightPurple ml-2 border-dashed border-b-2">
-                {possibleCategory ? possibleCategory.category : ''}
-              </span>
-            </span>
-          )}
-        </Link>
       </motion.div>
       <motion.div
         layout
-        className="w-full h-auto p-5 absolute left-full z-30 bg-darkGrey"
+        className="w-full md:grid md:grid-cols-4 md:gap-8 md:overflow-y-scroll h-auto p-5 absolute left-full z-30 bg-darkGrey"
       >
-        {gamesRes ? (
-          gamesRes.map((item, idx) => (
-            <SearchItem
-              game
-              key={`game${item.id}${item.slug}`}
+        {gamesRes
+          .filter((item, idx) => idx < 8)
+          .map((item, idx) => (
+            <GameItemSearch
+              key={`gamesearch${item.id}${item.slug}`}
               genres={item.genres}
               rating={item.rating}
               title={item.name}
-              loading={loading}
               price="59.99"
               category={item.category}
               image={item.background_image}
             />
-          ))
-        ) : (
-          <Spinner />
-        )}
+          ))}
+
+        <Link to="/games">
+          {searchInput && (
+            <span className="text-lightPurple ml-2 border-dashed border-b-2">
+              See More
+            </span>
+          )}
+        </Link>
       </motion.div>
     </div>
   );

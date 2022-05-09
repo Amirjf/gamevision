@@ -7,16 +7,16 @@ const GameItemSearch = ({ image, title, rating, genre }) => {
       initial={{ y: '100%' }}
       animate={{ y: 1 }}
       exit={{ y: '100%' }}
-      className="group w-1/2 h-36 overflow-hidden overflow-y-auto sm:w-full sm:h-16 transition-all ease duration-500 flex items-center rounded-md hover:bg-darkPurple p-2"
+      className="basis-auto flex-shrink-0 flex-grow-0"
     >
-      <div className="flex w-64 h-full sm:w-12 object-cover items-center rounded-md transition-all ease duration-500">
+      <div className="flex justify-evenly items-center rounded-md transition-all ease duration-500">
         <img
           src={image}
-          className="h-full w-full sm:w-12 sm:h-12 object-cover"
+          className="w-40 h-44 object-cover rounded-lg shadow-2xl shadow-grey"
           alt={title}
         />
       </div>
-      <div className="m-3">
+      <div className="m-3 text-center">
         <h4 className="text-white text-sm">{title}</h4>
         {/* <h5 className="text-shaded py-1">{genre.name}</h5> */}
         <span className="text-shaded text-base sm:hidden">
