@@ -25,13 +25,13 @@ const ProductGridItem = ({ product }) => {
   }, [cartItems]);
 
   return (
-    <div className="flex basis-1/4 mb-5">
+    <div>
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         exit={{ scale: 0, opacity: 0 }}
         transition={{ duration: 0.1 }}
-        class="product-item text-center bg-[#28282a]"
+        class="product-item w-56 sm:w-72 text-center bg-[#28282a]"
       >
         <div class="product-img">
           <img src={image} alt={title} />

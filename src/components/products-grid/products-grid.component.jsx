@@ -74,15 +74,12 @@ const ProductsGrid = ({ isLoading }) => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <div className="flex flex-wrap justify-center text-center">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-evenly gap-5 text-center">
             {!filteredProducts.length
               ? products
                   .filter((product, id) => id < showMore)
                   .map((product) => (
-                    <ProductGridItem
-                      key={`p-${product.id}`}
-                      product={product}
-                    />
+                    <ProductGridItem key={`p${product.id}`} product={product} />
                   ))
               : filteredProducts.map((product) => (
                   <ProductGridItem key={`r-${product.id}`} product={product} />

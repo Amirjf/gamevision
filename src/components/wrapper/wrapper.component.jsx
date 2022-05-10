@@ -7,7 +7,7 @@ const Wrapper = ({ children }) => {
 
   return (
     <div className={`${toggleNavbar ? '' : 'wrapper'}`}>
-      <div className={`content mb-36 mx-2`}>{children}</div>
+      <div className={`content mb-36 mx-2 md:mx-8 lg:mx-8`}>{children}</div>
     </div>
   );
 };

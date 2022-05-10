@@ -1,13 +1,9 @@
 div.product-item {
   position: relative;
-  margin: 10px;
-  min-width: 230px;
+  // margin: 10px;
   height: 300px;
-  max-width: 310px;
-  width: 100%;
   text-align: center;
   color: #333;
-  text-align: left;
   box-shadow: none !important;
   border-radius: 7px;
   border: solid 2px #28282a;
@@ -23,8 +19,8 @@ div.product-item * {
 }
 div.product-item img {
   max-width: 100%;
-  height: 135px;
-  width: 135px;
+  height: 139px;
+  width: 139px;
   -webkit-filter: drop-shadow(5px 5px 5px #000);
   filter: drop-shadow(5px 5px 5px #000);
   top: -25px;
