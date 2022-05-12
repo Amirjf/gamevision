@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { GetShopFilterAction } from '../../redux/games/getShopFilter';
 import Radio from '../input/radio.component';
-import useToggle from '../../hooks/useToggle';
+import FilterContainer from '../filter-container/filter-container.component';
 
 const YearOfReleaseFilter = () => {
-  const [showFilter, setShowFilter] = useToggle();
   const [selected, setSelected] = useState('2022-01-01,2022-04-20');
 
   const dispatch = useDispatch();
@@ -15,21 +14,8 @@ const YearOfReleaseFilter = () => {
   }, [selected]);
 
   return (
-    <div className="border-b border-b-shaded py-3 mt-2">
-      <div className="flex justify-between">
-        <span className="text-white">Year of Release</span>
-        <span
-          className="text-shaded text-lg cursor-pointer"
-          onClick={setShowFilter}
-        >
-          <i className={`bx bx-${showFilter ? 'minus' : 'plus'}`}></i>
-        </span>
-      </div>
-      <div
-        className={`${
-          showFilter ? 'h-40' : 'h-0 opacity-0'
-        } transition-all duration-500 overflow-hidden overflow-y-auto`}
-      >
+    <>
+      <FilterContainer title="Year">
         <Radio
           value="2022-01-01,2022-04-20"
           selected={selected}
@@ -86,8 +72,8 @@ const YearOfReleaseFilter = () => {
           label="2015"
           text="2015"
         />
-      </div>
-    </div>
+      </FilterContainer>
+    </>
   );
 };
 
