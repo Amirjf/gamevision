@@ -26,20 +26,22 @@ const GenreFilter = () => {
 
   return (
     <FilterContainer title="Genre">
-      {genres ? (
-        genres.map((genre) => (
-          <CustomButton
-            active={activeGenre === genre.name}
-            onClick={() => handleFilterGenre(genre.name, genre.id)}
-            size="sm"
-            inverted
-          >
-            {genre.name}
-          </CustomButton>
-        ))
-      ) : (
-        <Spinner />
-      )}
+      <div className="grid grid-cols-2">
+        {genres ? (
+          genres.map((genre) => (
+            <CustomButton
+              active={activeGenre === genre.name}
+              onClick={() => handleFilterGenre(genre.name, genre.id)}
+              size="sm"
+              inverted
+            >
+              {genre.name}
+            </CustomButton>
+          ))
+        ) : (
+          <Spinner />
+        )}
+      </div>
     </FilterContainer>
   );
 };

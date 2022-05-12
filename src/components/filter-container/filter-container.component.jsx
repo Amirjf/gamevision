@@ -10,7 +10,7 @@ const FilterContainer = ({ children, title }) => {
         onClick={setShowFilter}
         className="flex justify-between cursor-pointer"
       >
-        <span className="text-white">{title}</span>
+        <span className="text-white text-lg pb-4">{title}</span>
         <span className="text-shaded text-lg cursor-pointer">
           <i className={`bx bx-${showFilter ? 'minus' : 'plus'}`}></i>
         </span>

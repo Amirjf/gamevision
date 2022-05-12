@@ -9,7 +9,7 @@ const getPlusStyles = (props) => {
 const handleButtonSize = (props) => {
   switch (props.size) {
     case 'sm':
-      return 'padding: 0.3rem 1.9rem';
+      return 'padding: 0.4rem 0.9rem;font-size:14px;';
     case 'md':
       return 'padding: 0.5rem 1.5rem';
     default:
