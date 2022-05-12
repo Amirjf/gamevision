@@ -7,13 +7,12 @@ import Spinner from '../spinner/spinner.component';
 import CustomButton from '../custom-button/custom-button.component';
 import ProductGridItem from '../product-grid-item/product-grid-item.component';
 import SectionHeader from '../section-header/section-header.component';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 import './products-grid.styles.scss';
 
 const ProductsGrid = ({ isLoading }) => {
   const products = useSelector((state) => state.products);
-  const { cartItems } = useSelector((state) => state.cart);
   const filteredProducts = useSelector((state) => state.filteredProducts);
   const showMore = useSelector((state) => state.showMore);
   const dispatch = useDispatch();

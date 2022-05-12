@@ -58,22 +58,22 @@ const MobileHeader = () => {
   };
 
   return (
-    <div className="mobile-header sm:hidden flex absolute justify-evenly p-2 top-0 h-16 w-full">
+    <div className="sm:hidden my-5 flex h-16 w-full">
       <div
         className="flex items-center"
         onClick={() => dispatch(ToggleNavbarAction(!toggleNavbar))}
       >
         <i className="bx bx-menu-alt-left text-white text-3xl"></i>
       </div>
-      <div className="w-14 flex mx-auto items-center">
+      <div className="flex mx-auto items-center">
         <img
-          className="rounded-full"
+          className="w-14 h-14 rounded-full"
           src="https://avatars.githubusercontent.com/u/54482073?v=4"
           alt="avatar"
         />
       </div>
       <div
-        className="w-14 flex items-center"
+        className="flex items-center"
         onClick={() => setShowMobileSearch(!showMobileSearch)}
       >
         <i

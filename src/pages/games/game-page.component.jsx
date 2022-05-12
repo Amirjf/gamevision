@@ -9,17 +9,19 @@ import YearOfReleaseFilter from '../../components/year-of-release-filter/YearOfR
 
 const GamesPage = () => {
   return (
-    <div>
+    <>
       <Header />
       <SideNav />
-      <SideFilterContainer>
-        <GenreFilter />
-        <YearOfReleaseFilter />
-      </SideFilterContainer>
-      <GamePageContent>
-        <GamesGrid />
-      </GamePageContent>
-    </div>
+      <div className="flex flex-col md:flex-row lg:flex-row justify-between gap-7">
+        <SideFilterContainer>
+          <GenreFilter />
+          <YearOfReleaseFilter />
+        </SideFilterContainer>
+        <GamePageContent>
+          <GamesGrid />
+        </GamePageContent>
+      </div>
+    </>
   );
 };
 

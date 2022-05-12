@@ -6,15 +6,13 @@ const GenreFilter = () => {
   const { filters } = useSelector((state) => state.shopFilter);
   const dispatch = useDispatch();
   const [showFilter, setShowFilter] = useState(true);
+  const [activeGenre, setActiveGenre] = useState('');
 
   const toggle = () => setShowFilter(!showFilter);
 
   const handleActiveGenre = (genre, id) => {
-    const genreObj = {
-      id: id,
-      name: genre,
-    };
-    dispatch(GetShopFilterAction({ genres: genreObj }));
+    dispatch(GetShopFilterAction({ genres: id }));
+    setActiveGenre(genre);
   };
 
   useEffect(() => {
@@ -34,6 +32,7 @@ const GenreFilter = () => {
       {showFilter && (
         <div>
           <CustomButton
+            active={activeGenre === 'rpg'}
             onClick={() => handleActiveGenre('rpg', 5)}
             size="sm"
             inverted
@@ -42,6 +41,7 @@ const GenreFilter = () => {
           </CustomButton>
 
           <CustomButton
+            active={activeGenre === 'shooter'}
             onClick={() => handleActiveGenre('shooter', 2)}
             size="sm"
             inverted
@@ -50,6 +50,7 @@ const GenreFilter = () => {
           </CustomButton>
 
           <CustomButton
+            active={activeGenre === 'racing'}
             onClick={() => handleActiveGenre('racing', 1)}
             size="sm"
             inverted
@@ -58,6 +59,7 @@ const GenreFilter = () => {
           </CustomButton>
 
           <CustomButton
+            active={activeGenre === 'adventure'}
             onClick={() => handleActiveGenre('adventure', 3)}
             size="sm"
             inverted
