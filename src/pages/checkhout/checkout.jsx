@@ -1,6 +1,5 @@
-import React from "react";
-import Checkout from "../../components/checkout/checkout.component";
-import Header from "../../components/header/header.component";
+import React from 'react';
+import Checkout from '../../components/checkout/checkout.component';
 
 const CheckoutPage = () => {
   return (

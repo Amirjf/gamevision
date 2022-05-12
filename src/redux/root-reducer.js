@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
 import { cartReducer } from './cart';
 import { gamesSearchReducer, productsSearchReducer } from './search';
 import {
@@ -10,7 +12,13 @@ import {
 import { productsReducer, filteredProducts } from './products';
 import { showMoreReducer, toggleNavbarReducer } from './ui';
 
-export const rootReducer = combineReducers({
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['cart'],
+};
+
+const rootReducer = combineReducers({
   products: productsReducer,
   productsSearchResults: productsSearchReducer,
   shopFilter: getShopFilterReducer,
@@ -23,3 +31,5 @@ export const rootReducer = combineReducers({
   toggleNavbar: toggleNavbarReducer,
   games: gamesReducer,
 });
+
+export default persistReducer(persistConfig, rootReducer);

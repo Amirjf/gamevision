@@ -10,12 +10,12 @@ export const AddItemToCartAction = createAction(
 //create reducer
 export const AddItemReducer = (cartItems, cartItemToAdd) => {
   const existingCartItem = cartItems.find(
-    (cartItem) => cartItem.id == cartItemToAdd.id
+    (cartItem) => cartItem.id === cartItemToAdd.id
   );
 
   if (existingCartItem) {
     return cartItems.map((cartItem) =>
-      cartItem.id == cartItemToAdd.id
+      cartItem.id === cartItemToAdd.id
         ? { ...cartItem, quantity: cartItem.quantity + 1 }
         : cartItem
     );
