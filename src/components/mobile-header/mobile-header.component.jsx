@@ -25,7 +25,7 @@ const MobileHeader = () => {
   const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   const getGames = async () => {
-    const { data } = await GamesApi.get('', {
+    const { data } = await GamesApi.get('/games', {
       params: { search: searchInput },
     });
     dispatch(SetGamesSearchAction(data.results));

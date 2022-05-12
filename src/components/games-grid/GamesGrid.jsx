@@ -17,7 +17,7 @@ const GamesGrid = () => {
         console.log(item);
         return { ...acc, ...item };
       }, {});
-      const { data } = await GamesApi.get('', {
+      const { data } = await GamesApi.get('/games', {
         params: {
           ...activeFilters,
         },

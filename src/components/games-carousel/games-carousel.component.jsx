@@ -28,7 +28,7 @@ const GamesCarousel = () => {
 
   useEffect(() => {
     const getGames = async () => {
-      const { data } = await GamesApi.get('', {
+      const { data } = await GamesApi.get('/games', {
         params: { dates: '2022-01-01,2022-04-20' },
       });
       setIsLoading(false);
@@ -66,8 +66,9 @@ const GamesCarousel = () => {
           modules={[Navigation]}
           breakpoints={{
             320: { slidesPerView: 2 },
-            480: { slidesPerView: 3 },
-            768: { slidesPerView: 5, spaceBetween: 15 },
+            640: { slidesPerView: 3, spaceBetween: 15 },
+            1024: { slidesPerView: 5, spaceBetween: 15 },
+            1440: { slidesPerView: 5, spaceBetween: 15 },
           }}
           navigation={{
             prevEl,

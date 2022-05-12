@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = `https://api.rawg.io/api/games`;
+const baseUrl = `https://api.rawg.io/api`;
 const apiKey = '3dbe5baa7df44f92a7e6d3bdd8c28888';
 
 const GamesApi = axios.create({ baseURL: baseUrl });
