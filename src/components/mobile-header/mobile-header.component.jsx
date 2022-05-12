@@ -8,6 +8,7 @@ import SearchItem from '../search-item/SearchItem';
 import SearchItemNotFound from '../search-not-found/search-item-not-found.component';
 import GamesApi from '../../http/axios';
 import GameItemSearch from '../game-item-search/game-item-search.component';
+import { Link } from 'react-router-dom';
 
 const MobileHeader = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
@@ -66,11 +67,13 @@ const MobileHeader = () => {
         <i className="bx bx-menu-alt-left text-white text-3xl"></i>
       </div>
       <div className="flex mx-auto items-center">
-        <img
-          className="w-14 h-14 rounded-full"
-          src="https://avatars.githubusercontent.com/u/54482073?v=4"
-          alt="avatar"
-        />
+        <Link to="/">
+          <img
+            className="w-14 h-14 rounded-full"
+            src="https://avatars.githubusercontent.com/u/54482073?v=4"
+            alt="avatar"
+          />
+        </Link>
       </div>
       <div
         className="flex items-center"

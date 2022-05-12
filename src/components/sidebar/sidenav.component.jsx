@@ -17,7 +17,7 @@ const SideNav = () => {
   return (
     <>
       <div
-        className={`l-navbar w-1/2 md:w-1/5 lg:w-1/5 ${
+        className={`l-navbar w-64 md:w-72 lg:w-72 ${
           toggleNavbar ? 'hide' : null
         }`}
       >
