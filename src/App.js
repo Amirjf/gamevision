@@ -8,7 +8,8 @@ import Wrapper from './components/wrapper/wrapper.component';
 import Navigations from './components/navigations/navigations.component';
 
 import { getDocsFromCollection } from './firebase/firebase.utils';
-import GamesPage from './pages/games/game-page.component';
+import GamesPage from './pages/games/games-page.component';
+import GamePage from './pages/game/game-page.component';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="checkout" element={<CheckoutPage />} />
           </Route>
           <Route path="games" element={<GamesPage />} />
+          <Route path="games/:id" element={<GamePage />} />
         </Routes>
       </Wrapper>
     </>

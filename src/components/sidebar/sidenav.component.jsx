@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Logo from '../../assets/img/logo.png';
 import NavItem from './nav-item.component';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,6 +7,8 @@ import { ToggleNavbarAction } from '../../redux/ui/toggleNavbar';
 import { Link } from 'react-router-dom';
 import { navItems } from './navItems';
 import './sidenav.styles.scss';
+
+const mediaQuery = window.matchMedia('(max-width: 1024px)');
 
 const SideNav = () => {
   const toggleNavbar = useSelector((state) => state.toggleNavbar);
