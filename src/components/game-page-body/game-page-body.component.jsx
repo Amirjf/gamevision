@@ -1,10 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { AddItemToCartAction } from '../../redux/cart/addItem';
 import CustomButton from '../custom-button/custom-button.component';
 import Table from '../table/table.component';
 
 const GamePageBody = ({ tbodyData, gameData }) => {
+  const dispatch = useDispatch();
   const { description_raw } = gameData;
-
+  const handleAddToCart = (gameData) => {
+    dispatch(AddItemToCartAction(gameData));
+  };
   return (
     <div className="flex justify-end">
       <div className="p-4 w-1/3 items-center mt-10">
@@ -17,7 +22,7 @@ const GamePageBody = ({ tbodyData, gameData }) => {
         <div className="my-5">
           <h1 className="text-5xl text-purple font-semibold">59.99$</h1>
         </div>
-        <CustomButton>
+        <CustomButton onClick={() => handleAddToCart(gameData)}>
           ORDER NOW
           <i className="bx bx-basket pl-2"></i>
         </CustomButton>

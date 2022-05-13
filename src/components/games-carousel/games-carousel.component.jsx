@@ -10,6 +10,7 @@ import GamesApi from '../../http/axios';
 import 'swiper/css/navigation';
 import 'swiper/css/bundle';
 import Spinner from '../spinner/spinner.component';
+import { Link } from 'react-router-dom';
 
 const GamesCarousel = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -76,23 +77,27 @@ const GamesCarousel = () => {
           }}
         >
           {games.map((game) => (
-            <SwiperSlide key={game.added}>
+            <SwiperSlide key={game.id}>
               <div className="group game-container">
                 <div className="image-container relative shadow-md">
-                  <img
-                    className="transition z-0 w-full h-72 object-cover rounded-lg border-2 border-[#212123] ease-linear duration-300 group-hover:border-2 group-hover:border-[#86858b]"
-                    src={game.background_image}
-                    lazy
-                  />
-                  <span className="transition ease-linear duration-300 game-price py-1 px-3 rounded-xl absolute z-10 top-4 left-4 bg-[#171b1c] group-hover:bg-purple text-white font-sans text-xs ">
-                    59.99 $
-                  </span>
+                  <Link to={`games/${game.id}`}>
+                    <img
+                      className="transition z-0 w-full h-72 object-cover rounded-lg border-2 border-[#212123] ease-linear duration-300 group-hover:border-2 group-hover:border-[#86858b]"
+                      src={game.background_image}
+                      lazy
+                    />
+                    <span className="transition ease-linear duration-300 game-price py-1 px-3 rounded-xl absolute z-10 top-4 left-4 bg-[#171b1c] group-hover:bg-purple text-white font-sans text-xs ">
+                      59.99 $
+                    </span>
+                  </Link>
                 </div>
                 <div className="game-info flex justify-between p-1 pt-2">
-                  <div className="info">
-                    <h3 className="text-white font-semibold">{game.name}</h3>
-                    <span className="text-shaded">PC</span>
-                  </div>
+                  <Link to={`games/${game.id}`}>
+                    <div className="info">
+                      <h3 className="text-white font-semibold">{game.name}</h3>
+                      <span className="text-shaded">PC</span>
+                    </div>
+                  </Link>
                   <div className="game-add-to-cart">
                     <div
                       className="cursor-pointer"

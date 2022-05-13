@@ -4,7 +4,8 @@ import CustomButton from '../custom-button/custom-button.component';
 import Table from '../table/table.component';
 
 const GamePageHero = ({ tbodyData, gameData }) => {
-  const { background_image, name, tags } = gameData;
+  const { background_image, name, tags, genres } = gameData;
+  console.log('genres', genres);
   return (
     <div className="bg-purple z-10 rounded-sm">
       <div className="flex">
@@ -18,7 +19,9 @@ const GamePageHero = ({ tbodyData, gameData }) => {
           </div>
         </div>
         <div className="p-4 w-1/3 ml-auto">
-          <Badge bg="#734bac">Shooter</Badge>
+          {genres &&
+            genres.map((genre) => <Badge bg="#734bac">{genre.name}</Badge>)}
+
           <h1 className="text-white font-bold text-6xl my-3 leading-[4.2rem]">
             {name}
           </h1>

@@ -31,7 +31,7 @@ const GameScreenShotSlider = ({ gameId }) => {
                 <img
                   ref={ref}
                   onClick={open}
-                  className="object-cover rounded-2xl shadow-sm shadow-darkGrey"
+                  className="cursor-pointer object-cover rounded-2xl shadow-sm shadow-darkGrey"
                   src={image}
                   alt="gameScreenshot"
                 />
