@@ -4,6 +4,7 @@ import TableRow from './table-row.component';
 import { StyledTable } from './table.styles';
 
 const Table = ({ theadData, tbodyData, bg }) => {
+  console.log(tbodyData);
   return (
     <StyledTable bg={bg}>
       <thead>
@@ -15,9 +16,10 @@ const Table = ({ theadData, tbodyData, bg }) => {
         </tr>
       </thead>
       <tbody>
-        {tbodyData.map((item) => {
-          return <TableRow key={item.id} data={item.items} />;
-        })}
+        {tbodyData &&
+          tbodyData.map((item) => {
+            return <TableRow key={item.id} data={item.items} />;
+          })}
       </tbody>
     </StyledTable>
   );

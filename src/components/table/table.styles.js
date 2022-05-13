@@ -20,11 +20,17 @@ export const StyledTable = styled.table`
   td,
   th {
     padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
   }
 
   tbody tr:first-child td {
     padding-top: 18px;
     padding-bottom: 7px;
+  }
+  tbody tr:last-child td {
+    padding-bottom: 18px;
+    padding-top: 7px;
   }
 
   td:nth-child(even) {
