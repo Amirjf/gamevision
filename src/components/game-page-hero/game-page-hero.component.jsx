@@ -6,17 +6,17 @@ import Table from '../table/table.component';
 const GamePageHero = ({ tbodyData }) => {
   return (
     <div className="bg-purple z-10 rounded-sm">
-      <div className="flex justify-end">
-        <div className="w-1/3">
+      <div className="flex">
+        <div className="w-1/3 mx-auto">
           <div>
             <img
-              className="absolute top-4 w-[26rem] h-[34rem] object-cover rounded-lg shadow-xl shadow-darkGrey"
+              className="absolute top-4 left-9 w-[26rem] h-[34rem] object-cover rounded-lg shadow-xl shadow-darkGrey"
               src="https://media.rawg.io/media/games/faa/faa6a4a7a2e57faf2960329630aee211.jpg"
               alt=""
             />
           </div>
         </div>
-        <div className="p-4 w-1/3">
+        <div className="p-4 w-1/3 ml-auto">
           <Badge bg="#734bac">Shooter</Badge>
           <h1 className="text-white font-bold text-6xl my-3">FARCRY 6</h1>
           <div>Rating Stars</div>
