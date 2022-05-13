@@ -33,7 +33,8 @@ export const StyledTable = styled.table`
 
   tbody tr {
     height: 34px;
-    border-bottom: 1px solid #8557c4;
+    border-bottom: 1px solid #8a8b8d40;
+
     &:last-child {
       border: 0;
     }

@@ -3,9 +3,9 @@ import TableHeadItem from './table-head.component';
 import TableRow from './table-row.component';
 import { StyledTable } from './table.styles';
 
-const Table = ({ theadData, tbodyData }) => {
+const Table = ({ theadData, tbodyData, bg }) => {
   return (
-    <StyledTable>
+    <StyledTable bg={bg}>
       <thead>
         <tr>
           {theadData &&

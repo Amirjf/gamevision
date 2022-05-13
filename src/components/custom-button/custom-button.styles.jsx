@@ -45,7 +45,11 @@ export const activeButton = css`
 
 export const CustomButtonContainer = styled.button`
   color: #fff;
-  margin: 0.5rem 0.4rem;
+  align-items: center;
+  width: auto;
+ justify-content: center;
+  display: flex;
+  height: 45px;
   border-radius: 70px;
   border: ${(props) => (props.inverted ? 'solid 2px #414649;' : 'none')}
   transition: all 0.3s;
@@ -55,9 +59,10 @@ export const CustomButtonContainer = styled.button`
     background: rgb(126, 85, 193);
     
   } 
-  /* background: ${(props) =>
-    props.inverted ? 'none' : 'rgb(126, 85, 193);'}; */
- 
+
+  i{
+    font-size: 1.3rem;
+  }
     ${handleActive}   
     ${handleButtonSize}
     ${handleBackgroundColor}
