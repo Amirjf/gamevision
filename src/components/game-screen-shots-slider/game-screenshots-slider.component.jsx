@@ -12,6 +12,7 @@ const GameScreenShotSlider = ({ gameId }) => {
   };
 
   useEffect(() => {
+    console.log('test');
     getGameScreenShots();
   }, []);
 
