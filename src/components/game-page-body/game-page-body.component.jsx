@@ -11,8 +11,8 @@ const GamePageBody = ({ tbodyData, gameData }) => {
     dispatch(AddItemToCartAction(gameData));
   };
   return (
-    <div className="flex justify-end">
-      <div className="p-4 w-1/3 items-center mt-10">
+    <div className="flex mt-36 gap-4 md:mt-2 lg:mt-2 w-full lg:justify-end md:justify-end">
+      <div className="p-4 w-full md:w-1/3 lg:w-1/3 items-center mt-10">
         <p className="text-white font-semibold">Description</p>
         <p className="text-shaded pt-3">
           {description_raw && description_raw.length > 350
@@ -27,7 +27,7 @@ const GamePageBody = ({ tbodyData, gameData }) => {
           <i className="bx bx-basket pl-2"></i>
         </CustomButton>
       </div>
-      <div className="flex justify-around items-center w-1/4">
+      <div className="flex justify-start md:justify-around lg:justify-around items-center w-1/4">
         <div className="w-64">
           <Table bg="#373739" tbodyData={tbodyData} />
         </div>

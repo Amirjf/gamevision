@@ -7,12 +7,12 @@ const GamePageHero = ({ tbodyData, gameData }) => {
   const { background_image, name, tags, genres } = gameData;
   console.log('genres', genres);
   return (
-    <div className="bg-purple z-10 rounded-sm">
+    <div className="bg-purple pt-22 mt-36 md:mt-0 lg:mt-0 md:pt-0 lg:pt-0 z-10 rounded-sm">
       <div className="flex">
         <div className="w-1/3 mx-auto">
           <div>
             <img
-              className="absolute top-4 left-9 w-[26rem] h-[34rem] object-cover rounded-lg shadow-xl shadow-darkGrey"
+              className="absolute top-28 md:top-4 lg:top-4 left-9 w-[26rem] h-[34rem] object-cover rounded-lg shadow-xl shadow-darkGrey"
               src={background_image}
               alt=""
             />

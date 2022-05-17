@@ -92,10 +92,9 @@ const GamePage = () => {
     <>
       <Header />
       <SideNav />
-      <div className="flex gap-8 relative h-[550px]">
-        <div className="w-5/6">
+      <div className="flex flex-col md:flex-row lg:flex-row gap-8 relative h-[550px]">
+        <div className="w-full md:w-5/6 lg:w-5/6 order-2 md:order-none lg:order-none">
           <GamePageHero gameData={gameData} tbodyData={gameInfoForHeader} />
-
           <GamePageBody gameData={gameData} tbodyData={gameInfoForBody} />
         </div>
         <GameScreenShotSlider gameId={params.gameId} />
